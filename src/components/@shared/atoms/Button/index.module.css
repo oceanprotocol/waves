@@ -73,6 +73,21 @@
   min-width: auto;
 }
 
+.thin,
+.thin:hover,
+.thin:focus,
+.thin:active {
+  border: 0;
+  outline: 0;
+  padding: calc(var(--spacer) / 3) calc(var(--spacer) / 2);
+  display: inline-block;
+  background: 0;
+  box-shadow: none;
+  cursor: pointer;
+  min-width: auto;
+  background: var(--brand-gradient);
+}
+
 /* Size Modifiers */
 .small {
   font-size: var(--font-size-small);

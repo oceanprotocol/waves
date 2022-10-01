@@ -10,8 +10,10 @@ import App from 'src/components/App'
 
 import '@oceanprotocol/typographies/css/ocean-typo.css'
 import '../stylesGlobal/styles.css'
+import '../stylesGlobal/player.css'
 import Decimal from 'decimal.js'
 import MarketMetadataProvider from '@context/MarketMetadata'
+import { PlayerProvider } from '@context/Player.context'
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   Decimal.set({ rounding: 1 })
@@ -22,9 +24,11 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
           <UserPreferencesProvider>
             <PricesProvider>
               <ConsentProvider>
-                <App>
-                  <Component {...pageProps} />
-                </App>
+                <PlayerProvider>
+                  <App>
+                    <Component {...pageProps} />
+                  </App>
+                </PlayerProvider>
               </ConsentProvider>
             </PricesProvider>
           </UserPreferencesProvider>

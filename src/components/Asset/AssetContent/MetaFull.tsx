@@ -15,19 +15,37 @@ export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
   }
 
   return ddo ? (
-    <div className={styles.metaFull}>
+    <>
       {!isInPurgatory && (
-        <MetaItem title="Data Author" content={ddo?.metadata?.author} />
-      )}
-      <MetaItem
-        title="Owner"
-        content={<Publisher account={ddo?.nft?.owner} />}
-      />
+        <div className={styles.metaFull}>
+          <MetaItem title="Publisher" content={ddo?.metadata?.author} />
 
-      {ddo?.metadata?.type === 'algorithm' && ddo?.metadata?.algorithm && (
-        <MetaItem title="Docker Image" content={<DockerImage />} />
+          <MetaItem
+            title="Artist"
+            content={ddo?.metadata?.additionalInformation.artist}
+          />
+          <MetaItem
+            title="Title"
+            content={ddo?.metadata?.additionalInformation.title}
+          />
+          <MetaItem
+            title="Album"
+            content={ddo?.metadata?.additionalInformation.album}
+          />
+          <br />
+        </div>
       )}
-      <MetaItem title="DID" content={<code>{ddo?.id}</code>} />
-    </div>
+      <div className={styles.metaFull}>
+        <MetaItem
+          title="Owner"
+          content={<Publisher account={ddo?.nft?.owner} />}
+        />
+
+        {ddo?.metadata?.type === 'algorithm' && ddo?.metadata?.algorithm && (
+          <MetaItem title="Docker Image" content={<DockerImage />} />
+        )}
+        <MetaItem title="DID" content={<code>{ddo?.id}</code>} />
+      </div>
+    </>
   ) : null
 }

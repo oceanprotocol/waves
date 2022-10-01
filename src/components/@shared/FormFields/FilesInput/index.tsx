@@ -32,6 +32,13 @@ export default function FilesInput(props: InputProps): ReactElement {
       if (checkedFile[0].valid === false)
         throw Error('✗ No valid file detected. Check your URL and try again.')
 
+      // accept only mp3 and flac files
+      if (
+        checkedFile[0].contentType !== 'audio/mp3' &&
+        checkedFile[0].contentType !== 'audio/flac'
+      )
+        throw Error('✗ No audio file detected. Check your URL and try again.')
+
       // if all good, add file to formik state
       helpers.setValue([{ url, ...checkedFile[0] }])
     } catch (error) {

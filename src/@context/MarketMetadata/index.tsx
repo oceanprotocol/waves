@@ -28,15 +28,15 @@ function MarketMetadataProvider({
   useEffect(() => {
     async function getOpcData() {
       const opcData = []
-      for (let i = 0; i < appConfig.chainIdsSupported.length; i++) {
+      for (const element of appConfig.chainIdsSupported) {
         const response: OperationResult<OpcQuery> = await fetchData(
           opcQuery,
           null,
-          getQueryContext(appConfig.chainIdsSupported[i])
+          getQueryContext(element)
         )
 
         opcData.push({
-          chainId: appConfig.chainIdsSupported[i],
+          chainId: element,
           approvedTokens: response.data?.opc.approvedTokens.map(
             (token) => token.address
           ),

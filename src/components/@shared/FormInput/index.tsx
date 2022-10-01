@@ -5,6 +5,7 @@ import React, {
   ReactElement,
   ReactNode,
   useEffect,
+  useMemo,
   useState
 } from 'react'
 import InputElement from './InputElement'
@@ -102,8 +103,12 @@ export default function Input(props: Partial<InputProps>): ReactElement {
   // TODO: this feels hacky as it assumes nested `values` store. But we can't use the
   // `useField()` hook in here to get `meta.error` so we have to match against form?.errors?
   // handling flat and nested data at same time.
-  const parsedFieldName =
-    isFormikField && (isNestedField ? field?.name.split('.') : [field?.name])
+  const parsedFieldName = useMemo(
+    () =>
+      isFormikField && (isNestedField ? field?.name.split('.') : [field?.name]),
+    [isFormikField, isNestedField, field?.name]
+  )
+
   const hasFormikError = checkError(form, parsedFieldName, field)
 
   const styleClasses = cx({
@@ -123,7 +128,13 @@ export default function Input(props: Partial<InputProps>): ReactElement {
         )
       )
     }
-  }, [isFormikField, props.form?.values])
+  }, [
+    isFormikField,
+    props.form?.values,
+    disclaimer,
+    disclaimerValues,
+    parsedFieldName
+  ])
 
   return (
     <div className={styleClasses}>
