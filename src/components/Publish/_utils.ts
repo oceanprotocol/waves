@@ -66,14 +66,17 @@ export async function transformPublishFormToDdo(
     type,
     name,
     description,
+    category,
+    artist,
+    album,
     tags,
     author,
     termsAndConditions,
     dockerImage,
     dockerImageCustom,
     dockerImageCustomTag,
-    dockerImageCustomEntrypoint,
-    dockerImageCustomChecksum
+    dockerImageCustomEntrypoint
+    // dockerImageCustomChecksum
   } = metadata
   const { access, files, links, providerUrl, timeout } = services[0]
 
@@ -98,7 +101,11 @@ export async function transformPublishFormToDdo(
     license: 'https://market.oceanprotocol.com/terms',
     links: linksTransformed,
     additionalInformation: {
-      termsAndConditions
+      termsAndConditions,
+      category,
+      artist,
+      album,
+      title: name
     },
     ...(type === 'algorithm' &&
       dockerImage !== '' && {

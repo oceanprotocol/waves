@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react'
+import 'react-h5-audio-player/lib/styles.css'
 import Alert from '@shared/atoms/Alert'
 import Footer from '../Footer/Footer'
 import Header from '../Header'
@@ -10,6 +11,7 @@ import styles from './index.module.css'
 import { ToastContainer } from 'react-toastify'
 import contentPurgatory from '../../../content/purgatory.json'
 import { useMarketMetadata } from '@context/MarketMetadata'
+import Player from '../Player'
 
 export default function App({
   children
@@ -42,6 +44,7 @@ export default function App({
         <PrivacyPreferenceCenter style="small" />
       )}
 
+      <Player />
       <ToastContainer position="bottom-right" newestOnTop />
     </div>
   )

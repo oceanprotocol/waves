@@ -67,7 +67,7 @@ export function generateNftCreateData(
   nftMetadata: NftMetadata,
   accountId: string,
   transferable = true
-): any {
+) {
   const nftCreateData: NftCreateData = {
     name: nftMetadata.name,
     symbol: nftMetadata.symbol,

@@ -23,6 +23,7 @@ interface ButtonBuyProps {
   isBalanceSufficient: boolean
   isLoading?: boolean
   onClick?: (e: FormEvent<HTMLButtonElement>) => void
+  onPlay?: (e: FormEvent<HTMLButtonElement>) => void
   stepText?: string
   type?: 'submit'
   priceType?: string
@@ -125,6 +126,7 @@ export default function ButtonBuy({
   dtBalanceSelectedComputeAsset,
   selectedComputeAssetType,
   onClick,
+  onPlay,
   stepText,
   isLoading,
   type,
@@ -154,15 +156,22 @@ export default function ButtonBuy({
         <Loader message={stepText} />
       ) : (
         <>
-          <Button
-            style="primary"
-            type={type}
-            onClick={onClick}
-            disabled={disabled}
-            className={action === 'compute' ? styles.actionsCenter : ''}
-          >
-            {buttonText}
-          </Button>
+          <div style={{ display: 'flex', gap: 20 }}>
+            {onPlay && buttonText === 'Download' && (
+              <Button disabled={disabled} style="thin" onClick={onPlay}>
+                ▶ Play
+              </Button>
+            )}
+            <Button
+              style={buttonText === 'Download' ? 'text' : 'primary'}
+              type={type}
+              onClick={onClick}
+              disabled={disabled}
+              className={action === 'compute' ? styles.actionsCenter : ''}
+            >
+              {buttonText}
+            </Button>
+          </div>
           <div className={styles.help}>
             {action === 'download'
               ? getConsumeHelpText(

@@ -34,6 +34,9 @@ export interface FormPublishData {
     description: string
     author: string
     termsAndConditions: boolean
+    category: 'audio'
+    artist: string
+    album: string
     tags?: string
     dockerImage?: string
     dockerImageCustom?: string

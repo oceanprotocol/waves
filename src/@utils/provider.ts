@@ -111,3 +111,21 @@ export async function downloadFile(
   )
   await downloadFileBrowser(downloadUrl)
 }
+
+export async function getFileUrl(
+  web3: Web3,
+  asset: AssetExtended,
+  accountId: string,
+  validOrderTx?: string
+) {
+  const downloadUrl = await ProviderInstance.getDownloadUrl(
+    asset.id,
+    accountId,
+    asset.services[0].id,
+    0,
+    validOrderTx || asset.accessDetails.validOrderTx,
+    asset.services[0].serviceEndpoint,
+    web3
+  )
+  return downloadUrl
+}
