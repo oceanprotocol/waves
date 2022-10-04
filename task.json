@@ -54,7 +54,7 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "ocean-waves"
+      "name": "ocean-waves-test"
     }
   ],
   "placementConstraints": [],
