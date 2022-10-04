@@ -37,7 +37,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "013061880888.dkr.ecr.eu-central-1.amazonaws.com/ocean-waves-test:753fcba1c84c6d957cfa4ab2a4f342597f3a200d",
+      "image": "013061880888.dkr.ecr.eu-central-1.amazonaws.com/ocean-waves-test:latest",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
