@@ -10,4 +10,4 @@ WORKDIR /usr/app/market
 RUN npm ci --legacy-peer-deps
 RUN npm run build
 EXPOSE 80
-CMD ["npx", "next", "start", "-p 80"]
+CMD ["npx", "next", "start", "-p", "80"]
