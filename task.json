@@ -14,15 +14,15 @@
           "awslogs-stream-prefix": "ecs"
         }
       },
-      "entryPoint": [],
+      "entryPoint": null,
       "portMappings": [
         {
-          "hostPort": 3000,
+          "hostPort": 80,
           "protocol": "tcp",
-          "containerPort": 3000
+          "containerPort": 80
         }
       ],
-      "command": [],
+      "command": null,
       "linuxParameters": null,
       "cpu": 0,
       "environment": [],
@@ -37,7 +37,7 @@
       "memoryReservation": null,
       "volumesFrom": [],
       "stopTimeout": null,
-      "image": "013061880888.dkr.ecr.eu-central-1.amazonaws.com/ocean-waves-test:latest",
+      "image": "013061880888.dkr.ecr.eu-central-1.amazonaws.com/ocean-waves-test:753fcba1c84c6d957cfa4ab2a4f342597f3a200d",
       "startTimeout": null,
       "firelensConfiguration": null,
       "dependsOn": null,
@@ -45,7 +45,7 @@
       "interactive": null,
       "healthCheck": null,
       "essential": true,
-      "links": [],
+      "links": null,
       "hostname": null,
       "extraHosts": null,
       "pseudoTerminal": null,
@@ -54,14 +54,14 @@
       "dockerLabels": null,
       "systemControls": null,
       "privileged": null,
-      "name": "ocean-waves-test"
+      "name": "ocean-waves"
     }
   ],
   "placementConstraints": [],
   "memory": "512",
-  "taskRoleArn": null,
+  "taskRoleArn": "arn:aws:iam::013061880888:role/ecsTaskExecutionRole",
   "compatibilities": ["EC2", "FARGATE"],
-  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:013061880888:task-definition/ocean-waves-task:1",
+  "taskDefinitionArn": "arn:aws:ecs:eu-central-1:013061880888:task-definition/ocean-waves-task:5",
   "family": "ocean-waves-task",
   "requiresAttributes": [
     {
@@ -92,6 +92,12 @@
       "targetId": null,
       "targetType": null,
       "value": null,
+      "name": "com.amazonaws.ecs.capability.task-iam-role"
+    },
+    {
+      "targetId": null,
+      "targetType": null,
+      "value": null,
       "name": "ecs.capability.execution-role-ecr-pull"
     },
     {
@@ -110,9 +116,12 @@
   "pidMode": null,
   "requiresCompatibilities": ["FARGATE"],
   "networkMode": "awsvpc",
-  "runtimePlatform": null,
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX",
+    "cpuArchitecture": null
+  },
   "cpu": "256",
-  "revision": 1,
+  "revision": 5,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
