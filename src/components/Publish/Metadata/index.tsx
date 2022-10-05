@@ -4,18 +4,18 @@ import { Field, useFormikContext } from 'formik'
 import React, { ReactElement, useEffect } from 'react'
 import content from '../../../../content/publish/form.json'
 import { FormPublishData } from '../_types'
-import IconDataset from '@images/dataset.svg'
-import IconAlgorithm from '@images/algorithm.svg'
+// import IconDataset from '@images/dataset.svg'
+// import IconAlgorithm from '@images/algorithm.svg'
 import styles from './index.module.css'
 import { algorithmContainerPresets } from '../_constants'
 import Alert from '@shared/atoms/Alert'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import { getFieldContent } from '@utils/form'
 
-const assetTypeOptionsTitles = getFieldContent(
-  'type',
-  content.metadata.fields
-).options
+// const assetTypeOptionsTitles = getFieldContent(
+//   'type',
+//   content.metadata.fields
+// ).options
 
 export default function MetadataFields(): ReactElement {
   const { siteContent } = useMarketMetadata()
@@ -25,20 +25,20 @@ export default function MetadataFields(): ReactElement {
 
   // BoxSelection component is not a Formik component
   // so we need to handle checked state manually.
-  const assetTypeOptions: BoxSelectionOption[] = [
-    {
-      name: assetTypeOptionsTitles[0].toLowerCase(),
-      title: assetTypeOptionsTitles[0],
-      checked: values.metadata.type === assetTypeOptionsTitles[0].toLowerCase(),
-      icon: <IconDataset />
-    },
-    {
-      name: assetTypeOptionsTitles[1].toLowerCase(),
-      title: assetTypeOptionsTitles[1],
-      checked: values.metadata.type === assetTypeOptionsTitles[1].toLowerCase(),
-      icon: <IconAlgorithm />
-    }
-  ]
+  // const assetTypeOptions: BoxSelectionOption[] = [
+  //   {
+  //     name: assetTypeOptionsTitles[0].toLowerCase(),
+  //     title: assetTypeOptionsTitles[0],
+  //     checked: values.metadata.type === assetTypeOptionsTitles[0].toLowerCase(),
+  //     icon: <IconDataset />
+  //   },
+  //   {
+  //     name: assetTypeOptionsTitles[1].toLowerCase(),
+  //     title: assetTypeOptionsTitles[1],
+  //     checked: values.metadata.type === assetTypeOptionsTitles[1].toLowerCase(),
+  //     icon: <IconAlgorithm />
+  //   }
+  // ]
 
   // Populate the Docker image field with our presets in _constants,
   // transformPublishFormToDdo will do the rest.
@@ -58,23 +58,23 @@ export default function MetadataFields(): ReactElement {
       'services[0].algorithmPrivacy',
       values.metadata.type === 'algorithm'
     )
-  }, [values.metadata.type])
+  }, [values.metadata.type, setFieldValue])
 
   dockerImageOptions.push({ name: 'custom', title: 'Custom', checked: false })
 
   return (
     <>
-      <Field
+      {/* <Field
         {...getFieldContent('nft', content.metadata.fields)}
         component={Input}
         name="metadata.nft"
-      />
-      <Field
+      /> */}
+      {/* <Field
         {...getFieldContent('type', content.metadata.fields)}
         component={Input}
         name="metadata.type"
         options={assetTypeOptions}
-      />
+      /> */}
       {values.services[0].access === 'compute' && (
         <Alert
           className={styles.fieldWarning}
@@ -86,6 +86,16 @@ export default function MetadataFields(): ReactElement {
         {...getFieldContent('name', content.metadata.fields)}
         component={Input}
         name="metadata.name"
+      />
+      <Field
+        {...getFieldContent('artist', content.metadata.fields)}
+        component={Input}
+        name="metadata.artist"
+      />
+      <Field
+        {...getFieldContent('album', content.metadata.fields)}
+        component={Input}
+        name="metadata.album"
       />
       <Field
         {...getFieldContent('description', content.metadata.fields)}

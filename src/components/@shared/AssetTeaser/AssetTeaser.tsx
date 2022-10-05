@@ -24,39 +24,49 @@ export default function AssetTeaser({
   const accessType = isCompute ? 'compute' : 'access'
   const { owner } = asset.nft
   const { orders } = asset.stats
+
   return (
-    <article className={`${styles.teaser} ${styles[type]}`}>
-      <Link href={`/asset/${asset.id}`}>
-        <a className={styles.link}>
-          <header className={styles.header}>
-            <div className={styles.symbol}>{datatokens[0]?.symbol}</div>
-            <Dotdotdot tagName="h1" clamp={3} className={styles.title}>
-              {name.slice(0, 200)}
-            </Dotdotdot>
+    <article className={`${styles.teaser}`}>
+      <div className={styles.container}>
+        <Link href={`/asset/${asset.id}`}>
+          <a className={styles.link}>
+            {/* <header className={styles.header}>
+              <div className={styles.symbol}>{datatokens[0]?.symbol}</div>
+              <Dotdotdot tagName="h1" clamp={3} className={styles.title}>
+                {name.slice(0, 200)}
+              </Dotdotdot>
+            </header> */}
             {!noPublisher && (
               <Publisher account={owner} minimal className={styles.publisher} />
             )}
-          </header>
+            <AssetType
+              type={type}
+              accessType={accessType}
+              className={styles.typeDetails}
+              totalSales={orders}
+            />
 
-          <AssetType
-            type={type}
-            accessType={accessType}
-            className={styles.typeDetails}
-            totalSales={orders}
-          />
+            <div className={styles.content}>
+              <Dotdotdot tagName="h1" clamp={3} className={styles.title}>
+                {name.slice(0, 200)}
+              </Dotdotdot>
+              <Dotdotdot tagName="p" clamp={3}>
+                {removeMarkdown(description?.substring(0, 300) || '')}
+              </Dotdotdot>
+            </div>
 
-          <div className={styles.content}>
-            <Dotdotdot tagName="p" clamp={3}>
-              {removeMarkdown(description?.substring(0, 300) || '')}
-            </Dotdotdot>
-          </div>
-
-          <footer className={styles.foot}>
-            <Price accessDetails={asset.accessDetails} size="small" />
-            <NetworkName networkId={asset.chainId} className={styles.network} />
-          </footer>
-        </a>
-      </Link>
+            <footer className={styles.foot}>
+              {/* <Price accessDetails={asset.accessDetails} size="small" /> */}
+              {/* <NetworkName networkId={asset.chainId} className={styles.network} /> */}
+              {/* TODO: Add file type here mp3/flac */}
+              audio
+            </footer>
+          </a>
+        </Link>
+        {/* <div className={styles.actionArea}>
+          <button className={styles.button}>Buy/Play</button>
+        </div> */}
+      </div>
     </article>
   )
 }

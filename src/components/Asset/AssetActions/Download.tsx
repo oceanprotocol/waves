@@ -9,7 +9,7 @@ import AlgorithmDatasetsListForCompute from './Compute/AlgorithmDatasetsListForC
 import styles from './Download.module.css'
 import { FileInfo, LoggerInstance, ZERO_ADDRESS } from '@oceanprotocol/lib'
 import { order } from '@utils/order'
-import { downloadFile } from '@utils/provider'
+import { downloadFile, getFileUrl } from '@utils/provider'
 import { getOrderFeedback } from '@utils/feedback'
 import { getOrderPriceAndFees } from '@utils/accessDetailsAndPricing'
 import { toast } from 'react-toastify'
@@ -17,6 +17,7 @@ import { useIsMounted } from '@hooks/useIsMounted'
 import { useMarketMetadata } from '@context/MarketMetadata'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
+import { usePlayerContext } from '@context/Player.context'
 
 export default function Download({
   asset,
@@ -37,6 +38,7 @@ export default function Download({
   const { getOpcFeeForToken } = useMarketMetadata()
   const { isInPurgatory, isAssetNetwork } = useAsset()
   const isMounted = useIsMounted()
+  const { play, loading: loadingSong } = usePlayerContext()
 
   const [isDisabled, setIsDisabled] = useState(true)
   const [hasDatatoken, setHasDatatoken] = useState(false)
@@ -49,6 +51,10 @@ export default function Download({
     useState<OrderPriceAndFees>()
 
   const isUnsupportedPricing = asset?.accessDetails?.type === 'NOT_SUPPORTED'
+
+  useEffect(() => {
+    setIsLoading(loadingSong)
+  }, [loadingSong])
 
   useEffect(() => {
     if (!asset?.accessDetails || isUnsupportedPricing) return
@@ -159,6 +165,10 @@ export default function Download({
     setIsLoading(false)
   }
 
+  function handlePlay() {
+    getFileUrl(web3, asset, accountId, validOrderTx).then((url) => play(url))
+  }
+
   const PurchaseButton = () => (
     <ButtonBuy
       action="download"
@@ -169,6 +179,7 @@ export default function Download({
       dtSymbol={asset?.datatokens[0]?.symbol}
       dtBalance={dtBalance}
       onClick={handleOrderOrDownload}
+      onPlay={handlePlay}
       assetTimeout={secondsToString(asset.services[0].timeout)}
       assetType={asset?.metadata?.type}
       stepText={statusText}
@@ -210,20 +221,22 @@ export default function Download({
   }
 
   return (
-    <aside className={styles.consume}>
-      <div className={styles.info}>
-        <div className={styles.filewrapper}>
-          <FileIcon file={file} isLoading={fileIsLoading} small />
+    <>
+      <aside className={styles.consume}>
+        <div className={styles.info}>
+          <div className={styles.filewrapper}>
+            <FileIcon file={file} isLoading={fileIsLoading} small />
+          </div>
+          <AssetAction asset={asset} />
         </div>
-        <AssetAction asset={asset} />
-      </div>
 
-      {asset?.metadata?.type === 'algorithm' && (
-        <AlgorithmDatasetsListForCompute
-          algorithmDid={asset.id}
-          asset={asset}
-        />
-      )}
-    </aside>
+        {asset?.metadata?.type === 'algorithm' && (
+          <AlgorithmDatasetsListForCompute
+            algorithmDid={asset.id}
+            asset={asset}
+          />
+        )}
+      </aside>
+    </>
   )
 }

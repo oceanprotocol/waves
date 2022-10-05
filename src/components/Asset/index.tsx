@@ -23,15 +23,23 @@ export default function AssetDetails({ uri }: { uri: string }): ReactElement {
     setPageTitle(isInPurgatory ? '' : title)
   }, [asset, error, isInPurgatory, isV3Asset, router, title, uri])
 
-  return asset && pageTitle !== undefined && !loading ? (
-    <Page title={pageTitle} uri={uri}>
-      <AssetContent asset={asset} />
-    </Page>
-  ) : error && isV3Asset === false ? (
-    <Page title={pageTitle} noPageHeader uri={uri}>
-      <Alert title={pageTitle} text={error} state={'error'} />
-    </Page>
-  ) : (
+  if (asset && pageTitle !== undefined && !loading) {
+    return (
+      <Page title={pageTitle} uri={uri}>
+        <AssetContent asset={asset} />
+      </Page>
+    )
+  }
+
+  if (error && isV3Asset === false) {
+    return (
+      <Page title={pageTitle} noPageHeader uri={uri}>
+        <Alert title={pageTitle} text={error} state={'error'} />
+      </Page>
+    )
+  }
+
+  return (
     <Page title={undefined} uri={uri}>
       <Loader />
     </Page>

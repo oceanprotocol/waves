@@ -1,0 +1,21 @@
+.rhap_container {
+  background: var(--background-content);
+}
+
+.rhap_time {
+  color: var(--font-color-text);
+}
+
+.rhap_progress-indicator,
+.rhap_volume-indicator {
+  background: var(--color-secondary);
+}
+
+.rhap_button-clear {
+  color: var(--color-secondary);
+}
+
+.rhap_download-progress,
+.rhap_volume-bar {
+  background: var(--border-color);
+}

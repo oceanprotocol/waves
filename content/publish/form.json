@@ -19,7 +19,20 @@
       {
         "name": "name",
         "label": "Title",
-        "placeholder": "e.g. Shapes of Desert Plants",
+        "help": "Song name",
+        "placeholder": "e.g. Bohemian Rhapsody",
+        "required": true
+      },
+      {
+        "name": "artist",
+        "label": "Artist",
+        "placeholder": "e.g. Queen",
+        "required": true
+      },
+      {
+        "name": "album",
+        "label": "Album",
+        "placeholder": "e.g. A night at the opera",
         "required": true
       },
       {
@@ -31,15 +44,15 @@
       },
       {
         "name": "author",
-        "label": "Author",
+        "label": "Publisher",
         "placeholder": "e.g. Jelly McJellyfish",
         "help": "Give proper attribution for your dataset. You are welcome to use a pseudonym, and you can change your author name at any time. Please note that it will remain in the transaction history. For more information on how personal data is handled within the metadata, please refer to our [privacy policy](/privacy/en).",
         "required": true
       },
       {
         "name": "tags",
-        "label": "Tags",
-        "placeholder": "e.g. logistics, ai",
+        "label": "(Genre) Tags",
+        "placeholder": "e.g. Rap, Pop, Rock, 80s",
         "help": "Separate tags with comma."
       },
       {
@@ -102,8 +115,8 @@
       },
       {
         "name": "files",
-        "label": "File",
-        "placeholder": "e.g. https://file.com/file.json",
+        "label": "Audio File",
+        "placeholder": "e.g. https://file.com/file.mp3",
         "help": "This URL will be stored encrypted after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.** For a compute dataset, your file should match the file type required by the algorithm, and should not exceed 1 GB in file size. ",
         "prominentHelp": true,
         "type": "files",
@@ -111,8 +124,8 @@
       },
       {
         "name": "links",
-        "label": "Sample file",
-        "placeholder": "e.g. https://file.com/samplefile.json",
+        "label": "Sample audio file",
+        "placeholder": "e.g. https://file.com/samplefile.mp3",
         "help": "This file should reveal the data structure of your dataset, e.g. by including the header and one line of a CSV file. This file URL will be publicly available after publishing. **Please make sure that the endpoint is accessible over the internet and is not protected by a firewall or by credentials.**",
         "prominentHelp": true,
         "type": "files"
