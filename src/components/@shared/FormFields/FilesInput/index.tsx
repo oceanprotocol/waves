@@ -35,6 +35,7 @@ export default function FilesInput(props: InputProps): ReactElement {
       // accept only mp3 and flac files
       if (
         checkedFile[0].contentType !== 'audio/mp3' &&
+        checkedFile[0].contentType !== 'audio/mpeg' &&
         checkedFile[0].contentType !== 'audio/flac'
       )
         throw Error('✗ No audio file detected. Check your URL and try again.')
