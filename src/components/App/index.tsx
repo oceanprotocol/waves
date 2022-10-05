@@ -25,7 +25,12 @@ export default function App({
   return (
     <div className={styles.app}>
       {siteContent?.announcement !== '' && (
-        <AnnouncementBanner text={siteContent?.announcement} />
+        <AnnouncementBanner
+          text={
+            'NEXT_PUBLIC_INFURA_PROJECT_ID = ' +
+            process.env.NEXT_PUBLIC_INFURA_PROJECT_ID
+          }
+        />
       )}
       <Header />
 
