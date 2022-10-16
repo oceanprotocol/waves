@@ -1,11 +1,12 @@
 import React, { useState, useEffect, ReactElement } from 'react'
-import { useRouter } from 'next/router'
+import { useRouter, reload } from 'next/router'
 import Page from '@shared/Page'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
 import { useAsset } from '@context/Asset'
 import AssetContent from './AssetContent'
 import { v3MarketUri } from 'app.config'
+import Button from '@shared/atoms/Button'
 
 export default function AssetDetails({ uri }: { uri: string }): ReactElement {
   const router = useRouter()
@@ -33,9 +34,23 @@ export default function AssetDetails({ uri }: { uri: string }): ReactElement {
 
   if (error && isV3Asset === false) {
     return (
-      <Page title={pageTitle} noPageHeader uri={uri}>
-        <Alert title={pageTitle} text={error} state={'error'} />
-      </Page>
+      // <Page title={pageTitle} noPageHeader uri={uri}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 100,
+          height: '50vh'
+        }}
+      >
+        <Alert state="info" title={pageTitle} text={error} />
+        <Button onClick={() => reload(window.location.pathname)} style="thin">
+          Refresh Page
+        </Button>
+      </div>
+      // </Page>
     )
   }
 

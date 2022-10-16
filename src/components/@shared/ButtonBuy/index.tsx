@@ -162,15 +162,17 @@ export default function ButtonBuy({
                 ▶ Play
               </Button>
             )}
-            <Button
-              style={buttonText === 'Download' ? 'text' : 'primary'}
-              type={type}
-              onClick={onClick}
-              disabled={disabled}
-              className={action === 'compute' ? styles.actionsCenter : ''}
-            >
-              {buttonText}
-            </Button>
+            {buttonText !== 'Download' && (
+              <Button
+                style={buttonText === 'Download' ? 'text' : 'primary'}
+                type={type}
+                onClick={onClick}
+                disabled={disabled}
+                className={action === 'compute' ? styles.actionsCenter : ''}
+              >
+                {buttonText}
+              </Button>
+            )}
           </div>
           <div className={styles.help}>
             {action === 'download'

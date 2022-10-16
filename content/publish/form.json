@@ -36,6 +36,11 @@
         "required": true
       },
       {
+        "name": "coverPicture",
+        "label": "Cover Picture",
+        "placeholder": "e.g. https://photos.com/bohemian-rhapsody.jpg"
+      },
+      {
         "name": "description",
         "label": "Description",
         "help": "Add a thorough description with as much detail as possible. You can use [Markdown](https://daringfireball.net/projects/markdown/basics). You can change the description at any time. If you provide personal data, please note that it will remain in the transaction history. For more information on how personal data is handled within the metadata, please refer to our [privacy policy](/privacy/en).",
@@ -51,9 +56,33 @@
       },
       {
         "name": "tags",
-        "label": "(Genre) Tags",
+        "label": "Tags",
         "placeholder": "e.g. Rap, Pop, Rock, 80s",
         "help": "Separate tags with comma."
+      },
+      {
+        "name": "genre",
+        "label": "Genre",
+        "type": "select",
+        "options": [
+          "Pop",
+          "Hip-Hop",
+          "Rock",
+          "Rap",
+          "Blues",
+          "Soul",
+          "Reggae",
+          "Country",
+          "Funk",
+          "Folk",
+          "Jazz",
+          "Disco",
+          "Classical",
+          "Electronic",
+          "Other"
+        ],
+        "sortOptions": false,
+        "required": true
       },
       {
         "name": "dockerImage",
@@ -155,7 +184,7 @@
         "type": "select",
         "options": ["Forever", "1 day", "1 week", "1 month", "1 year"],
         "sortOptions": false,
-        "required": true
+        "required": false
       }
     ]
   },

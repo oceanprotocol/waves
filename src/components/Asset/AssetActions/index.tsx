@@ -148,7 +148,7 @@ export default function AssetActions({
     </>
   )
 
-  const tabs: TabsItem[] = [{ title: 'Use', content: UseContent }]
+  const tabs: TabsItem[] = [{ title: '', content: UseContent }]
 
   return (
     <>
