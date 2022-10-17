@@ -97,6 +97,7 @@ export default function MetadataFields(): ReactElement {
         component={Input}
         name="metadata.album"
       />
+
       <Field
         {...getFieldContent('description', content.metadata.fields)}
         component={Input}
@@ -108,10 +109,16 @@ export default function MetadataFields(): ReactElement {
         component={Input}
         name="metadata.author"
       />
-      <Field
+      {/* <Field
         {...getFieldContent('tags', content.metadata.fields)}
         component={Input}
         name="metadata.tags"
+      /> 
+      */}
+      <Field
+        {...getFieldContent('genre', content.metadata.fields)}
+        component={Input}
+        name="metadata.genre"
       />
 
       {values.metadata.type === 'algorithm' && (

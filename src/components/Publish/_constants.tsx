@@ -63,6 +63,8 @@ export const initialValues: FormPublishData = {
     name: '',
     author: '',
     album: '',
+    coverPicture: '',
+    genre: '',
     description: '',
     tags: '',
     termsAndConditions: false,
@@ -78,7 +80,7 @@ export const initialValues: FormPublishData = {
       files: [{ url: '' }],
       links: [{ url: '' }],
       dataTokenOptions: { name: '', symbol: '' },
-      timeout: '',
+      timeout: 'Forever',
       access: 'access',
       providerUrl: {
         url: 'https://provider.mainnet.oceanprotocol.com',

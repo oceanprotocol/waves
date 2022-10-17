@@ -101,6 +101,11 @@ export default function ServicesFields(): ReactElement {
         name="services[0].providerUrl"
       />
       <Field
+        {...getFieldContent('coverPicture', content.metadata.fields)}
+        component={Input}
+        name="metadata.coverPicture"
+      />
+      <Field
         {...getFieldContent('files', content.services.fields)}
         component={Input}
         name="services[0].files"
@@ -110,11 +115,11 @@ export default function ServicesFields(): ReactElement {
         component={Input}
         name="services[0].links"
       /> */}
-      <Field
+      {/* <Field
         {...getFieldContent('timeout', content.services.fields)}
         component={Input}
         name="services[0].timeout"
-      />
+      /> */}
     </>
   )
 }

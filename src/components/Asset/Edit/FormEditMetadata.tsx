@@ -30,17 +30,18 @@ export default function FormEditMetadata({
   // https://github.com/oceanprotocol/market/pull/324#discussion_r561132310
   // if (data && values) handleTimeoutCustomOption(data, values)
 
-  const timeoutOptionsArray = data.filter(
-    (field) => field.name === 'timeout'
-  )[0].options
+  // const timeoutOptionsArray = data.filter(
+  //   (field) => field.name === 'timeout'
+  // )[0].options
 
-  if (isComputeDataset && timeoutOptionsArray.includes('Forever')) {
-    const foreverOptionIndex = timeoutOptionsArray.indexOf('Forever')
-    timeoutOptionsArray.splice(foreverOptionIndex, 1)
-  } else if (!isComputeDataset && !timeoutOptionsArray.includes('Forever')) {
-    timeoutOptionsArray.push('Forever')
-  }
+  // if (isComputeDataset && timeoutOptionsArray.includes('Forever')) {
+  //   const foreverOptionIndex = timeoutOptionsArray.indexOf('Forever')
+  //   timeoutOptionsArray.splice(foreverOptionIndex, 1)
+  // } else if (!isComputeDataset && !timeoutOptionsArray.includes('Forever')) {
+  //   timeoutOptionsArray.push('Forever')
+  // }
 
+  console.log('data', data)
   return (
     <Form>
       {data.map(
@@ -49,9 +50,10 @@ export default function FormEditMetadata({
             <Field
               key={field.name}
               options={
-                field.name === 'timeout' && isComputeDataset === true
-                  ? timeoutOptionsArray
-                  : field.options
+                // field.name === 'timeout' && isComputeDataset === true
+                //   ? timeoutOptionsArray
+                // :
+                field.options
               }
               {...field}
               component={Input}

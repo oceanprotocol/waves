@@ -6,11 +6,20 @@ import React, {
   useState
 } from 'react'
 
+type SongDataType = {
+  artist: string
+  album: string
+  coverPicture: string
+  genre: string
+  title: string
+}
+
 type UsePlayerType = {
   song: string
-  play: (url: string) => void
+  play: (url: string, songData: SongDataType) => void
   loading: boolean
   close: () => void
+  songData: SongDataType
 }
 
 export const PlayerContext = createContext({} as UsePlayerType)
@@ -22,6 +31,7 @@ type Props = {
 export const PlayerProvider: React.FC<Props> = ({ children }) => {
   const [assetUrl, setAssetUrl] = useState('')
   const [song, setSong] = useState('')
+  const [songData, setSongData] = useState<SongDataType>()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
@@ -40,17 +50,22 @@ export const PlayerProvider: React.FC<Props> = ({ children }) => {
       })
   }, [assetUrl])
 
-  const play = (url: string) => {
+  const play = (
+    url: string,
+    data: SongDataType & { [key: string]: string }
+  ) => {
+    setSongData(data)
     setAssetUrl(url)
   }
 
   const close = () => {
     setSong('')
     setAssetUrl('')
+    setSongData(undefined)
   }
 
   return (
-    <PlayerContext.Provider value={{ song, play, loading, close }}>
+    <PlayerContext.Provider value={{ song, play, loading, close, songData }}>
       {children}
     </PlayerContext.Provider>
   )

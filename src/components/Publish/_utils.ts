@@ -67,6 +67,8 @@ export async function transformPublishFormToDdo(
     name,
     description,
     category,
+    coverPicture,
+    genre,
     artist,
     album,
     tags,
@@ -105,6 +107,8 @@ export async function transformPublishFormToDdo(
       category,
       artist,
       album,
+      coverPicture,
+      genre,
       title: name
     },
     ...(type === 'algorithm' &&

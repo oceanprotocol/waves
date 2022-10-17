@@ -118,6 +118,34 @@ export async function getFileUrl(
   accountId: string,
   validOrderTx?: string
 ) {
+  // const url = asset.services[0].serviceEndpoint
+
+  // const nonce = await ProviderInstance.getNonce(url, accountId)
+  // console.log('nonce', nonce)
+
+  // const signature = await ProviderInstance.signProviderRequest(
+  //   web3,
+  //   accountId,
+  //   ' '
+  // )
+  // console.log('signature', signature)
+  // const endpoint = '/api/services/createAuthToken'
+  // const link =
+  //   url +
+  //   endpoint +
+  //   '?signature=' +
+  //   signature +
+  //   '&nonce=' +
+  //   nonce +
+  //   '&address=' +
+  //   accountId +
+  //   '&expiration=' +
+  //   '1670053210'
+
+  // fetch(link)
+  //   .then((response) => response.json())
+  //   .then((data) => console.log(data))
+
   const downloadUrl = await ProviderInstance.getDownloadUrl(
     asset.id,
     accountId,
@@ -128,4 +156,40 @@ export async function getFileUrl(
     web3
   )
   return downloadUrl
+}
+
+export async function authTest(
+  web3: Web3,
+  asset: AssetExtended,
+  accountId: string,
+  validOrderTx?: string
+) {
+  console.log('accountId', accountId)
+  const url = asset.services[0].serviceEndpoint
+
+  const nonce = await ProviderInstance.getNonce(url, accountId)
+  console.log('nonce', nonce)
+
+  const signature = await ProviderInstance.signProviderRequest(
+    web3,
+    accountId,
+    'signed message'
+  )
+  console.log('signature', signature)
+  const endpoint = '/api/services/createAuthToken'
+  const link =
+    url +
+    endpoint +
+    '?signature=' +
+    signature +
+    '&nonce=' +
+    nonce +
+    '&address=' +
+    accountId +
+    '&expiration=' +
+    '1670053210'
+
+  fetch(link)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
 }

@@ -9,7 +9,7 @@ import AlgorithmDatasetsListForCompute from './Compute/AlgorithmDatasetsListForC
 import styles from './Download.module.css'
 import { FileInfo, LoggerInstance, ZERO_ADDRESS } from '@oceanprotocol/lib'
 import { order } from '@utils/order'
-import { downloadFile, getFileUrl } from '@utils/provider'
+import { authTest, downloadFile, getFileUrl } from '@utils/provider'
 import { getOrderFeedback } from '@utils/feedback'
 import { getOrderPriceAndFees } from '@utils/accessDetailsAndPricing'
 import { toast } from 'react-toastify'
@@ -166,7 +166,11 @@ export default function Download({
   }
 
   function handlePlay() {
-    getFileUrl(web3, asset, accountId, validOrderTx).then((url) => play(url))
+    // authTest(web3, asset, accountId, validOrderTx).then((url) => play(url))
+    console.log('asset', asset)
+    getFileUrl(web3, asset, accountId, validOrderTx).then((url) =>
+      play(url, asset.metadata.additionalInformation)
+    )
   }
 
   const PurchaseButton = () => (
@@ -225,7 +229,14 @@ export default function Download({
       <aside className={styles.consume}>
         <div className={styles.info}>
           <div className={styles.filewrapper}>
-            <FileIcon file={file} isLoading={fileIsLoading} small />
+            <img
+              style={{ margin: '0 20px 0 0' }}
+              width={80}
+              height={80}
+              src={asset.metadata.additionalInformation.coverPicture}
+              alt=""
+            />
+            {/* <FileIcon file={file} isLoading={fileIsLoading} small /> */}
           </div>
           <AssetAction asset={asset} />
         </div>

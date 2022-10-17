@@ -8,6 +8,8 @@ import { FormPublishData } from 'src/components/Publish/_types'
 import { LoggerInstance } from '@oceanprotocol/lib'
 import { useAsset } from '@context/Asset'
 
+const ACCEPTED_FILE_TYPES = ['audio/mp3', 'audio/mpeg', 'audio/flac']
+
 export default function FilesInput(props: InputProps): ReactElement {
   const [field, meta, helpers] = useField(props.name)
   const [isLoading, setIsLoading] = useState(false)
@@ -33,11 +35,19 @@ export default function FilesInput(props: InputProps): ReactElement {
         throw Error('✗ No valid file detected. Check your URL and try again.')
 
       // accept only mp3 and flac files
-      if (
-        checkedFile[0].contentType !== 'audio/mp3' &&
-        checkedFile[0].contentType !== 'audio/flac'
-      )
-        throw Error('✗ No audio file detected. Check your URL and try again.')
+      if (!ACCEPTED_FILE_TYPES.includes(checkedFile[0].contentType)) {
+        const type = await fetch(url)
+          .then((response) => response.blob())
+          .then((blob) => {
+            return blob.type
+          })
+
+        console.log('type', type)
+
+        if (!ACCEPTED_FILE_TYPES.includes(type)) {
+          throw Error('✗ No audio file detected. Check your URL and try again.')
+        }
+      }
 
       // if all good, add file to formik state
       helpers.setValue([{ url, ...checkedFile[0] }])

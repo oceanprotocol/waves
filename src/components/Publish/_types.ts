@@ -37,6 +37,8 @@ export interface FormPublishData {
     category: 'audio'
     artist: string
     album: string
+    coverPicture: string
+    genre: string
     tags?: string
     dockerImage?: string
     dockerImageCustom?: string

@@ -74,13 +74,13 @@ export default function PublishedList({
 
   return accountId ? (
     <>
-      <Filters
+      {/* <Filters
         serviceType={service}
         setServiceType={setServiceType}
         accessType={access}
         setAccessType={setAccessType}
         className={styles.filters}
-      />
+      /> */}
       <AssetList
         assets={queryResult?.results}
         isLoading={isLoading}
