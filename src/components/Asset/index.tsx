@@ -1,5 +1,5 @@
 import React, { useState, useEffect, ReactElement } from 'react'
-import { useRouter, reload } from 'next/router'
+import { useRouter } from 'next/router'
 import Page from '@shared/Page'
 import Alert from '@shared/atoms/Alert'
 import Loader from '@shared/atoms/Loader'
@@ -46,7 +46,7 @@ export default function AssetDetails({ uri }: { uri: string }): ReactElement {
         }}
       >
         <Alert state="info" title={pageTitle} text={error} />
-        <Button onClick={() => reload(window.location.pathname)} style="thin">
+        <Button onClick={() => location.reload()} style="thin">
           Refresh Page
         </Button>
       </div>
