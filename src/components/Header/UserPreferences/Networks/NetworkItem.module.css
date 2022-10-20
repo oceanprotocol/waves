@@ -2,6 +2,7 @@
   composes: radioWrap from '@shared/FormInput/InputRadio.module.css';
   padding: calc(var(--spacer) / 4) calc(var(--spacer) / 3);
   border-bottom: 1px solid var(--border-color);
+  background-color: var(--fields-background);
 }
 
 .radioWrap:last-child {
@@ -13,6 +14,7 @@
   vertical-align: baseline;
   margin-right: calc(var(--spacer) / 3);
   margin-top: 0;
+  background-color: var(--fields-background);
 }
 
 .radioLabel {

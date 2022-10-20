@@ -1,7 +1,7 @@
 .blockies {
   width: var(--font-size-large);
   height: var(--font-size-large);
-  border-radius: 50%;
+  border-radius: 3px;
   overflow: hidden;
   display: inline-block;
   vertical-align: middle;

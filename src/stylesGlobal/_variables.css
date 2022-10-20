@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500;700&family=Urbanist:wght@300;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500;700&family=Urbanist:wght@500;900&display=swap');
 
 :root {
   --brand-white: #ffffff;
@@ -10,7 +10,7 @@
   --brand-grey-darker: #201f1f;
   --brand-grey-dark: #303030;
   --brand-grey: #41474e;
-  --brand-grey-light: #8b98a9;
+  --brand-grey-light: #ffffff;
   --brand-grey-lighter: #e2e2e2;
   --brand-grey-dimmed: #f7f7f7;
 
@@ -22,7 +22,7 @@
   --brand-alert-yellow: #eac146;
 
   --color-primary: #fe2843;
-  --color-secondary: #8b98a9;
+  --color-secondary: #c4c4c4;
   --color-secondary-gradient: linear-gradient(
     80.6deg,
     #008ee8 11.62%,
@@ -32,11 +32,12 @@
   /* Only use these vars for most color referencing for easy light/dark mode */
   --font-color-text: #ebebeb;
   --font-color-heading: #ffffff;
-  --background-body: #1a1a1a;
+  --background-body: #252425;
   --background-body-transparent: rgba(255, 255, 255, 0.8);
   --background-content: #1a1a1a;
   --background-highlight: #f7f7f7;
-  --border-color: #e2e2e2;
+  --border-color: #686868;
+  --fields-background: #444444;
   --box-shadow-color: rgba(0, 0, 0, 0.05);
 
   --font-family-base: 'Urbanist', sans-serif, -apple-system, BlinkMacSystemFont,
@@ -79,7 +80,7 @@
 .dark {
   --font-color-text: #e2e2e2;
   --font-color-heading: #f7f7f7;
-  --background-body: rgb(10, 10, 10);
+  --background-body: #252425;
   --background-body-transparent: rgba(10, 10, 10, 0.9);
   --background-content: #141414;
   --background-highlight: #201f1f;

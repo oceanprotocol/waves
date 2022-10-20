@@ -3,17 +3,17 @@
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-small);
   text-transform: uppercase;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: calc(var(--spacer) / 4) calc(var(--spacer) / 3);
+  border: none;
+  padding: 0;
   white-space: nowrap;
-  background: var(--background-content);
+  background: none;
   margin: 0;
   transition: border 0.2s ease-out;
   cursor: pointer;
   height: 100%;
   display: flex;
   align-items: center;
+  display: inline-block;
 }
 
 .button,
@@ -43,18 +43,14 @@
 }
 
 .address {
-  display: none;
   text-transform: none;
-  border-right: 1px solid var(--border-color);
-  padding-right: calc(var(--spacer) / 3);
-  padding-left: calc(var(--spacer) / 8);
+  margin: 0 5px;
+  font-weight: 500;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @media screen and (min-width: 60rem) {
-  .address {
-    display: inline-block;
-  }
-
   .blockies {
     margin-right: calc(var(--spacer) / 6);
   }
@@ -67,5 +63,6 @@
 }
 
 .caret {
-  composes: caret from '../Menu.module.css';
+  display: inline-block;
+  vertical-align: middle;
 }

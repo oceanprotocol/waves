@@ -1,4 +1,5 @@
 .wallet {
-  display: flex;
-  align-self: stretch;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
 }
