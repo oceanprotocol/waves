@@ -19,9 +19,8 @@ export default function Footer(): ReactElement {
 
       <div className={styles.grid}>
         {/* <Links /> */}
-        <div>Ocean Waves</div>
         <div className={styles.copyright}>
-          © {year} <Markdown text={siteContent?.copyright} />
+          © {year}, <Markdown text={siteContent?.copyright} />
           {/* <Button
             style="text"
             size="small"

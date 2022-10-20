@@ -35,22 +35,7 @@
   text-align: center;
 }
 
-.grid {
-  display: grid;
-  gap: var(--spacer);
-}
-
 @media (min-width: 40rem) {
-  .grid {
-    display: grid;
-    gap: var(--spacer);
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
-  }
-
-  .grid > div:first-child {
-    text-align: left;
-  }
-
   .copyright {
     text-align: right;
   }

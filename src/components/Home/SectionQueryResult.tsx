@@ -21,12 +21,14 @@ export default function SectionQueryResult({
   title,
   query,
   action,
-  queryData
+  queryData,
+  trendingList
 }: {
-  title: ReactElement | string
+  title?: ReactElement | string
   query: SearchQuery
   action?: ReactElement
   queryData?: string[]
+  trendingList?: boolean
 }) {
   const { chainIds } = useUserPreferences()
   const [result, setResult] = useState<PagedAssets>()
@@ -73,12 +75,12 @@ export default function SectionQueryResult({
 
   return (
     <section className={styles.section}>
-      <h3>{title}</h3>
-
+      {title && <h3>{title}</h3>}
       <AssetList
         assets={result?.results}
         showPagination={false}
         isLoading={loading || !query}
+        trendingList={trendingList}
       />
 
       {!!action && action}

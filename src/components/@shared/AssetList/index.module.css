@@ -6,8 +6,8 @@
 
 @media screen and (min-width: 25rem) {
   .assetList {
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-    gap: var(--spacer);
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--assets-list-spacer);
   }
 }
 
@@ -21,4 +21,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .assetList {
+    grid-template-columns: inherit;
+    gap: var(--assets-list-spacer);
+  }
+}
+
+.trendingList.assetList {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+@media screen and (max-width: 700px) {
+  .trendingList.assetList {
+    width: 750px;
+  }
 }

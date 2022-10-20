@@ -5,11 +5,6 @@
 
 .container {
   display: block;
-  background: var(--background-content);
-  border-radius: calc(var(--border-radius) * 4);
-  border-bottom: 1px solid var(--border-color);
-  box-shadow: 0 6px 17px 0 var(--box-shadow-color);
-  /* padding: calc(var(--spacer) / 5); */
 
   font-size: var(--font-size-small);
   height: 100%;
@@ -21,7 +16,6 @@
 }
 
 .link {
-  composes: box from '@shared/atoms/Box.module.css';
   font-size: var(--font-size-small);
   height: 100%;
   color: var(--color-secondary);
@@ -94,4 +88,118 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.assetimage {
+  width: 100%;
+  padding-bottom: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center center;
+  border-radius: var(--assetimage-border-radius);
+  margin-bottom: 10px;
+}
+
+h2.assetName {
+  font-size: 1.1rem;
+  font-family: var(--font-family-base);
+  height: 40px;
+  overflow: hidden;
+  position: relative;
+  margin: 0;
+}
+
+h2.assetName:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.assetArtists {
+  margin: 0 0 10px;
+  line-height: 1.1;
+}
+
+.priceDesktop {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background-color: var(--background-body);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+.priceInfoMobile {
+  display: none;
+}
+
+.trendingAsset .assetimage {
+  padding-bottom: 230px;
+  margin: 0;
+}
+
+.trendingAsset .assetInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 0px 0px 20px 20px;
+  padding: 7px 12px;
+  width: 100%;
+}
+
+.trendingAsset .assetInfo .priceInfoMobile {
+  display: block;
+}
+
+.trendingAsset .assetInfo .assetArtists {
+  margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .teaser {
+    max-width: inherit;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 10px;
+  }
+  .link {
+    width: 100%;
+    display: block;
+  }
+  .assetimage:not(.trendingAsset .assetimage) {
+    width: 80px;
+    padding-bottom: 80px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-bottom: 0;
+  }
+  .priceDesktop {
+    display: none;
+  }
+  .priceInfoMobile {
+    display: block;
+  }
+  .assetInfo {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 90px - 80px);
+  }
+  h2.assetName {
+    height: inherit;
+  }
+  .assetArtists {
+    margin: 0;
+  }
+  .assetAction {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: right;
+    width: 80px;
+  }
 }
