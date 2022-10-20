@@ -36,8 +36,7 @@ function MenuLink({ item }: { item: MenuItem }) {
 
 export default function Menu(): ReactElement {
   const { siteContent } = useMarketMetadata()
-  let { accountId } = useWeb3()
-  accountId = 'sdfsf'
+  const { accountId } = useWeb3()
   const [searchOpen, setSearchOpen] = useState(false)
 
   return (
