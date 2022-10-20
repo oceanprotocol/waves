@@ -28,6 +28,7 @@ declare type AssetListProps = {
   onPageChange?: React.Dispatch<React.SetStateAction<number>>
   className?: string
   noPublisher?: boolean
+  trendingList?: boolean
 }
 
 export default function AssetList({
@@ -38,7 +39,8 @@ export default function AssetList({
   isLoading,
   onPageChange,
   className,
-  noPublisher
+  noPublisher,
+  trendingList
 }: AssetListProps): ReactElement {
   const { chainIds } = useUserPreferences()
   const { accountId } = useWeb3()
@@ -69,7 +71,8 @@ export default function AssetList({
 
   const styleClasses = cx({
     assetList: true,
-    [className]: className
+    [className]: className,
+    trendingList
   })
 
   return chainIds.length === 0 ? (
@@ -85,6 +88,7 @@ export default function AssetList({
               asset={assetWithPrice}
               key={assetWithPrice.id}
               noPublisher={noPublisher}
+              trendingList={trendingList}
             />
           ))
         ) : (

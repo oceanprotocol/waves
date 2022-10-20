@@ -4,10 +4,6 @@
   margin-top: calc(var(--spacer) * var(--line-height));
 }
 
-.section {
-  margin-top: calc(var(--spacer) * 2);
-}
-
 .section h3 {
   font-size: var(--font-size-large);
   color: var(--color-secondary);
@@ -15,4 +11,72 @@
 
 .section [class*='button'] {
   margin-top: var(--spacer);
+}
+
+.tabsButtons {
+  margin-bottom: 20px;
+}
+
+.tabsButtons button {
+  background: none;
+  border: none;
+  color: white;
+  font-family: var(--font-family-heading);
+  font-size: 20px;
+  position: relative;
+  padding: 0 0 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.tabsButtons button.active {
+  font-weight: bold;
+}
+
+.tabsButtons button:disabled {
+  opacity: 0.2;
+}
+
+.tabsButtons button.active:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 100px;
+}
+
+.trendingtitleBar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.trendingTitle {
+  font-family: var(--font-family-heading);
+  font-size: 25px;
+  font-weight: 900;
+  margin: 0;
+  align-self: flex-end;
+  line-height: 1;
+}
+
+.trendingShowMore {
+  align-self: flex-end;
+  color: var(--color-secondary);
+}
+
+.trendingWrap {
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: 700px) {
+  .trendingWrap {
+    width: 100%;
+    overflow-x: auto;
+  }
 }
