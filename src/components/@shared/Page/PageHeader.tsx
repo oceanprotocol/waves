@@ -10,7 +10,7 @@ export default function PageHeader({
   description,
   center
 }: {
-  title: ReactElement
+  title: ReactElement | string
   description?: string
   center?: boolean
 }): ReactElement {
