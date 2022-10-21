@@ -283,14 +283,26 @@ export default function PublishPage({
       {({ values }) => (
         <>
           <PageHeader
-            title={<Title networkId={values.user.chainId} />}
-            description={content.description}
+            title={
+              accountId ? (
+                <Title networkId={values.user.chainId} />
+              ) : (
+                'Please connect your wallet'
+              )
+            }
+            description={
+              accountId
+                ? content.description
+                : 'You must have a connected wallet in order to publish a song.'
+            }
           />
-          <Form className={styles.form} ref={scrollToRef}>
-            <Navigation />
-            <Steps feedback={feedback} />
-            <Actions scrollToRef={scrollToRef} did={did} />
-          </Form>
+          {accountId && (
+            <Form className={styles.form} ref={scrollToRef}>
+              <Navigation />
+              <Steps feedback={feedback} />
+              <Actions scrollToRef={scrollToRef} did={did} />
+            </Form>
+          )}
           {debug && <Debug />}
         </>
       )}
