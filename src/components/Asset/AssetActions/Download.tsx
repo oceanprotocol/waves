@@ -40,7 +40,7 @@ export default function Download({
 }): ReactElement {
   const { accountId, web3 } = useWeb3()
   const { getOpcFeeForToken } = useMarketMetadata()
-  const { isInPurgatory, isAssetNetwork } = useAsset()
+  const { isInPurgatory, isAssetNetwork, isOwner } = useAsset()
   const isMounted = useIsMounted()
   const { play, loading: loadingSong } = usePlayerContext()
 
@@ -196,6 +196,7 @@ export default function Download({
       isConsumable={asset.accessDetails?.isPurchasable}
       isBalanceSufficient={isBalanceSufficient}
       consumableFeedback={consumableFeedback}
+      fullWidth
     />
   )
 
@@ -210,16 +211,20 @@ export default function Download({
           />
         ) : (
           <>
-            {isPriceLoading ? (
-              <Loader message="Calculating full price (including fees)" />
-            ) : (
-              <Price
-                accessDetails={asset.accessDetails}
-                orderPriceAndFees={orderPriceAndFees}
-                conversion
-                size="large"
-              />
-            )}
+            <div className={styles.priceWrap}>
+              {isPriceLoading ? (
+                <Loader message="Calculating full price (including fees)" />
+              ) : (
+                isOwner && (
+                  <Price
+                    accessDetails={asset.accessDetails}
+                    orderPriceAndFees={orderPriceAndFees}
+                    conversion
+                    size="large"
+                  />
+                )
+              )}
+            </div>
 
             {!isInPurgatory && <PurchaseButton />}
           </>
@@ -232,16 +237,9 @@ export default function Download({
     <>
       <aside className={styles.consume}>
         <div className={styles.info}>
-          <div className={styles.filewrapper}>
-            <img
-              style={{ margin: '0 20px 0 0' }}
-              width={80}
-              height={80}
-              src={asset.metadata.additionalInformation.coverPicture}
-              alt=""
-            />
-            {/* <FileIcon file={file} isLoading={fileIsLoading} small /> */}
-          </div>
+          {/* <div className={styles.filewrapper}>
+            <FileIcon file={file} isLoading={fileIsLoading} small />
+          </div> */}
           <AssetAction asset={asset} />
         </div>
 
