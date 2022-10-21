@@ -1,23 +1,7 @@
 .search {
-  display: flex;
+  display: inline-block;
   position: relative;
-}
-
-.button {
-  color: var(--color-secondary);
-  cursor: pointer;
-  background: var(--background-content);
-  border: none;
-  box-shadow: none;
-  padding: 0;
-  position: absolute;
-  padding: calc(var(--spacer) / 4);
-  width: 100%;
-  right: 1px;
-  left: 1px;
-  top: 1px;
-  bottom: 1px;
-  z-index: -1;
+  vertical-align: middle;
 }
 
 .button:hover,
@@ -28,46 +12,69 @@
 .input {
   font-size: 16px; /* prevent zoom in on input focus on mobile devices  */
   background-color: transparent;
-  height: 41px;
   margin: 0;
   outline: 0;
-  padding-right: var(--spacer);
-  width: 0;
+  width: 45px;
   transition: none;
-}
-
-.input:focus {
-  width: calc(100% - var(--spacer));
-  background-color: var(--background-content);
-  position: fixed;
-  left: calc(var(--spacer) / 2);
-  right: 0;
-  z-index: 2;
-}
-
-@media screen and (min-width: 78rem) {
-  .input,
-  .input:focus {
-    width: auto;
-    position: relative;
-    left: initial;
-    right: initial;
-  }
-
-  .button {
-    width: auto;
-    left: auto;
-    background: none;
-  }
-
-  .input:focus + .button {
-    z-index: 3;
-  }
+  border: none;
+  overflow: hidden;
+  background: #1a1a1a;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 0;
+  transition: 0.2s all ease-in-out;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .searchIcon {
   fill: currentColor;
   transition: 0.2s ease-out;
-  width: var(--font-size-h5);
-  height: var(--font-size-h5);
+}
+
+.button {
+  background: none;
+  border: none;
+  color: white;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  right: 10px;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 15px;
+  fill: currentColor;
+  transition: 0.2s ease-out;
+}
+
+.openedSearch input {
+  width: 300px;
+  padding: 10px;
+  opacity: 1;
+  pointer-events: initial;
+}
+
+/* clears the ‘X’ from Internet Explorer */
+.input::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+/* clears the ‘X’ from Chrome */
+.input::-webkit-search-decoration,
+.input::-webkit-search-cancel-button,
+.input::-webkit-search-results-button,
+.input::-webkit-search-results-decoration {
+  display: none;
 }

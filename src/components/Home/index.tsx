@@ -7,17 +7,23 @@ import { useUserPreferences } from '@context/UserPreferences'
 import { SortTermOptions } from '../../@types/aquarius/SearchQuery'
 // import PublishersWithMostSales from './PublishersWithMostSales'
 import SectionQueryResult from './SectionQueryResult'
+import cx from 'classnames'
+import styles from './index.module.css'
+import Link from 'next/link'
+import { useWeb3 } from '@context/Web3'
 
 export default function HomePage(): ReactElement {
   const [queryLatest, setQueryLatest] = useState<SearchQuery>()
-  // const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
+  const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
   const { chainIds } = useUserPreferences()
+  const [activeTab, setActiveTab] = useState<'recently' | 'owned'>('recently')
+  const { accountId } = useWeb3()
 
   useEffect(() => {
     const baseParams = {
       chainIds,
       esPaginationOptions: {
-        size: 9
+        size: 10
       },
       sortOptions: {
         sortBy: SortTermOptions.Created
@@ -25,21 +31,25 @@ export default function HomePage(): ReactElement {
     } as BaseQueryParams
     setQueryLatest(generateBaseQuery(baseParams))
 
-    // const baseParamsSales = {
-    //   chainIds,
-    //   esPaginationOptions: {
-    //     size: 9
-    //   },
-    //   sortOptions: {
-    //     sortBy: SortTermOptions.Stats
-    //   } as SortOptions
-    // } as BaseQueryParams
-    // setQueryMostSales(generateBaseQuery(baseParamsSales))
-  }, [chainIds])
+    const baseParamsSales = {
+      chainIds,
+      esPaginationOptions: {
+        size: 4
+      },
+      sortOptions: {
+        sortBy: SortTermOptions.Stats
+      } as SortOptions
+    } as BaseQueryParams
+    setQueryMostSales(generateBaseQuery(baseParamsSales))
+  }, [chainIds, accountId])
 
   useEffect(() => {
     console.log('queryLatest', queryLatest)
   }, [queryLatest])
+
+  const handleTabChange = (tabname: 'recently' | 'owned') => {
+    setActiveTab(tabname)
+  }
 
   return (
     <>
@@ -47,18 +57,59 @@ export default function HomePage(): ReactElement {
         <h3>Bookmarks</h3>
         <Bookmarks />
       </section> */}
-
-      {/* <SectionQueryResult title="Most Sales" query={queryMostSales} /> */}
-
-      <SectionQueryResult
-        title="Recently Published"
-        query={queryLatest}
-        action={
-          <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
-            All audio files →
-          </Button>
-        }
-      />
+      <div className={styles.trendingtitleBar}>
+        <div className={styles.trendingTitle}>Trending</div>
+        <Link href="/search?sort=stats.orders&sortOrder=desc">
+          <a
+            href="/search?sort=stats.orders&sortOrder=desc"
+            className={styles.trendingShowMore}
+          >
+            Show more
+          </a>
+        </Link>
+      </div>
+      <div className={styles.trendingWrap}>
+        <SectionQueryResult query={queryMostSales} trendingList />
+      </div>
+      <div className={styles.tabsButtons}>
+        <button
+          className={cx(
+            activeTab === 'recently' && accountId ? styles.active : ''
+          )}
+          onClick={() => handleTabChange('recently')}
+        >
+          Recently
+        </button>
+        {accountId && (
+          <button
+            className={cx(activeTab === 'owned' ? styles.active : '')}
+            onClick={() => handleTabChange('owned')}
+            disabled
+          >
+            Owned
+          </button>
+        )}
+      </div>
+      {activeTab === 'recently' ? (
+        <SectionQueryResult
+          query={queryLatest}
+          action={
+            <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
+              All audio files →
+            </Button>
+          }
+        />
+      ) : (
+        // TODO: filter datasets that user owns
+        <SectionQueryResult
+          query={queryLatest}
+          action={
+            <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
+              All audio files →
+            </Button>
+          }
+        />
+      )}
 
       {/* <PublishersWithMostSales title="Publishers With Most Sales" /> */}
     </>

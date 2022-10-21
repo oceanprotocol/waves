@@ -36,7 +36,7 @@
 
 .actions {
   order: 2;
-  display: flex;
+  display: inline-block;
   margin-left: auto;
 }
 
@@ -71,7 +71,7 @@
   .title {
     margin: 0;
     display: block;
-    color: var(--color-secondary);
+    color: white;
     font-size: var(--font-size-h4);
     margin-right: calc(var(--spacer) / 6);
   }
@@ -180,4 +180,31 @@ svg.caret {
   margin: 0 calc(var(--spacer) / 4);
   padding: 0;
   font-size: var(--font-size-small);
+}
+
+.publishBtn {
+  background: var(--color-primary);
+  border-radius: 5px;
+  color: white;
+  display: inline-block;
+  padding: 5px 10px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.publishBtn svg {
+  display: inline;
+  vertical-align: middle;
+  margin: -1px 2px 0 0;
+}
+
+.publishBtn span {
+  display: inline;
+  vertical-align: middle;
+}
+
+.profileLink {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 15px;
 }

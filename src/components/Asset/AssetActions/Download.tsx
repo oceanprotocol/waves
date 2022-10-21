@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react'
-import FileIcon from '@shared/FileIcon'
+// import FileIcon from '@shared/FileIcon'
 import Price from '@shared/Price'
 import { useAsset } from '@context/Asset'
 import { useWeb3 } from '@context/Web3'
@@ -9,7 +9,11 @@ import AlgorithmDatasetsListForCompute from './Compute/AlgorithmDatasetsListForC
 import styles from './Download.module.css'
 import { FileInfo, LoggerInstance, ZERO_ADDRESS } from '@oceanprotocol/lib'
 import { order } from '@utils/order'
-import { authTest, downloadFile, getFileUrl } from '@utils/provider'
+import {
+  // authTest,
+  downloadFile,
+  getFileUrl
+} from '@utils/provider'
 import { getOrderFeedback } from '@utils/feedback'
 import { getOrderPriceAndFees } from '@utils/accessDetailsAndPricing'
 import { toast } from 'react-toastify'
@@ -21,10 +25,10 @@ import { usePlayerContext } from '@context/Player.context'
 
 export default function Download({
   asset,
-  file,
+  // file,
   isBalanceSufficient,
   dtBalance,
-  fileIsLoading,
+  // fileIsLoading,
   consumableFeedback
 }: {
   asset: AssetExtended

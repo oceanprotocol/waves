@@ -7,10 +7,12 @@ import React, {
   ReactElement
 } from 'react'
 import SearchIcon from '@images/search.svg'
+import CloseIcon from '@images/closeIcon.svg'
 import InputElement from '@shared/FormInput/InputElement'
 import styles from './SearchBar.module.css'
 import { addExistingParamsToUrl } from '../Search/utils'
 import { useRouter } from 'next/router'
+import cx from 'classnames'
 
 async function emptySearch() {
   const searchParams = new URLSearchParams(window?.location.href)
@@ -28,10 +30,14 @@ async function emptySearch() {
 
 export default function SearchBar({
   placeholder,
-  initialValue
+  initialValue,
+  searchOpen,
+  setSearchOpen
 }: {
   placeholder?: string
   initialValue?: string
+  searchOpen: boolean
+  setSearchOpen: React.Dispatch<React.SetStateAction<boolean>>
 }): ReactElement {
   const router = useRouter()
   const [value, setValue] = useState(initialValue || '')
@@ -69,11 +75,12 @@ export default function SearchBar({
 
   async function handleButtonClick(e: FormEvent<HTMLButtonElement>) {
     e.preventDefault()
-    await startSearch(e)
+    await setSearchOpen(!searchOpen)
+    // await startSearch(e)
   }
 
   return (
-    <form className={styles.search}>
+    <form className={cx(styles.search, searchOpen && styles.openedSearch)}>
       <InputElement
         type="search"
         name="search"
@@ -86,7 +93,11 @@ export default function SearchBar({
         onKeyPress={handleKeyPress}
       />
       <button onClick={handleButtonClick} className={styles.button}>
-        <SearchIcon className={styles.searchIcon} />
+        {searchOpen ? (
+          <CloseIcon width={15} height={15} />
+        ) : (
+          <SearchIcon width={15} height={15} />
+        )}
       </button>
     </form>
   )

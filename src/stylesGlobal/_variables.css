@@ -1,14 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@500;700&family=Urbanist:wght@500;900&display=swap');
+
 :root {
   --brand-white: #ffffff;
   --brand-black: #141414;
-  --brand-pink: #ff4092;
+  --brand-pink: #fe2843;
   --brand-purple: #7b1173;
   --brand-violet: #e000cf;
 
   --brand-grey-darker: #201f1f;
   --brand-grey-dark: #303030;
   --brand-grey: #41474e;
-  --brand-grey-light: #8b98a9;
+  --brand-grey-light: #ffffff;
   --brand-grey-lighter: #e2e2e2;
   --brand-grey-dimmed: #f7f7f7;
 
@@ -19,23 +21,30 @@
   --brand-alert-orange: #b35f36;
   --brand-alert-yellow: #eac146;
 
-  --color-primary: #ff4092;
-  --color-secondary: #8b98a9;
+  --color-primary: #fe2843;
+  --color-primary-hover: #aa0b1f;
+  --color-secondary: #c4c4c4;
+  --color-secondary-gradient: linear-gradient(
+    80.6deg,
+    #008ee8 11.62%,
+    #4bd7fe 93.92%
+  );
 
   /* Only use these vars for most color referencing for easy light/dark mode */
-  --font-color-text: #41474e;
-  --font-color-heading: #141414;
-  --background-body: #fcfcfc;
+  --font-color-text: #ebebeb;
+  --font-color-heading: #ffffff;
+  --background-body: #252425;
   --background-body-transparent: rgba(255, 255, 255, 0.8);
-  --background-content: #fff;
+  --background-content: #1a1a1a;
   --background-highlight: #f7f7f7;
-  --border-color: #e2e2e2;
+  --border-color: #353535;
+  --fields-background: #444444;
   --box-shadow-color: rgba(0, 0, 0, 0.05);
 
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
-    Arial, sans-serif;
-  --font-family-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Helvetica, Arial, sans-serif;
+  --font-family-base: 'Urbanist', sans-serif, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-family-heading: 'Signika Negative', sans-serif, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-family-monospace: , monospace;
 
   --font-size-root: 15px;
@@ -56,21 +65,23 @@
   --line-height: 1.6;
 
   --spacer: 2rem;
+  --assets-list-spacer: 1rem;
   --border-radius: 0.2rem;
+  --assetimage-border-radius: 20px;
 
   --layout-max-width: 85rem;
   --checkbox-size: 1.6em;
 
   --break-point--small: 640px;
-  --break-point--medium: 860px;
-  --break-point--large: 1140px;
-  --break-point--huge: 1400px;
+  --break-point--medium: 810px;
+  --break-point--large: 810px;
+  --break-point--huge: 810px;
 }
 
 .dark {
   --font-color-text: #e2e2e2;
   --font-color-heading: #f7f7f7;
-  --background-body: rgb(10, 10, 10);
+  --background-body: #252425;
   --background-body-transparent: rgba(10, 10, 10, 0.9);
   --background-content: #141414;
   --background-highlight: #201f1f;

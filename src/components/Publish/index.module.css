@@ -1,6 +1,8 @@
 .form {
   composes: box from '@shared/atoms/Box.module.css';
   margin-bottom: var(--spacer);
+  border-radius: 10px;
+  border: none;
 }
 
 @media (min-width: 40rem) {

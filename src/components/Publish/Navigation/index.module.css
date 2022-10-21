@@ -4,7 +4,25 @@
   padding: calc(var(--spacer) / 2) 0;
   scrollbar-width: none;
   border-bottom: 1px solid var(--border-color);
-  background-color: var(--background-highlight);
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  position: relative;
+}
+
+.navigation ::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.navigation ol:before {
+  content: '';
+  height: 1px;
+  background-color: var(--border-color);
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  width: 100%;
 }
 
 @media (min-width: 40rem) {
@@ -28,22 +46,44 @@
   text-align: center;
   width: 100%;
   padding: 0;
-  margin: 0;
+  margin: 0 auto;
   counter-reset: list-number;
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (min-width: 40rem) {
+  .navigation ol {
+    width: calc(100% - var(--spacer) * 2);
+    width: calc(100% - var(--spacer) * 2);
+  }
+}
+
+@media (min-width: 60rem) {
+  .navigation ol {
+    width: calc(100% - var(--spacer) * 4);
+    width: calc(100% - var(--spacer) * 4);
+  }
 }
 
 .navigation li {
   cursor: pointer;
   display: inline-block;
-  margin: 0 var(--spacer);
-  padding: 0 calc(var(--spacer) / 2);
+  margin: 0 15px 0 0;
+  padding: 0 10px;
   counter-increment: list-number;
   font-weight: var(--font-weight-bold);
   white-space: nowrap;
   position: relative;
+  background-color: var(--background-content);
+}
+
+.navigation li:last-child {
+  margin: 0;
 }
 
 /* inject the numbers */
@@ -59,25 +99,20 @@
   margin-right: calc(var(--spacer) / 4);
 }
 
-/* inject line */
-.navigation li:after {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 100%;
-  top: 1rem;
-  width: 50%;
-  height: 1px;
-  background: var(--border-color);
+@media (max-width: 700px) {
+  .navigation li {
+    white-space: initial;
+    width: auto;
+    padding: 0 2px;
+    text-align: center;
+    font-size: var(--font-size-small);
+  }
+  .navigation li:before {
+    margin: 0 10px;
+  }
 }
-
-.navigation li:last-child:after {
-  display: none;
-}
-
 .current:before {
-  color: var(--background-content);
-  background: var(--font-color-heading);
+  background: var(--border-color);
   border-color: transparent;
 }
 
