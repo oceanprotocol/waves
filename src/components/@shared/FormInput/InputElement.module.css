@@ -82,12 +82,8 @@
   height: 200px;
 }
 
+.multipleSelect:focus,
 .select:focus {
-  outline: 0;
-  font-family: var(--font-family-base);
-}
-
-.multipleSelect:focus {
   outline: 0;
   font-family: var(--font-family-base);
 }
