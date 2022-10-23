@@ -64,6 +64,7 @@
         "name": "genre",
         "label": "Genre",
         "type": "select",
+        "multiple": true,
         "options": [
           "Pop",
           "Hip-Hop",
