@@ -1,5 +1,5 @@
-.teaser {
-  max-width: 40rem;
+.teaser:not(.trendingAsset) {
+  max-width: 140px;
   height: 100%;
 }
 
@@ -103,7 +103,7 @@
 h2.assetName {
   font-size: 1.1rem;
   font-family: var(--font-family-base);
-  height: 40px;
+  max-height: 40px;
   overflow: hidden;
   position: relative;
   margin: 0;
@@ -117,7 +117,7 @@ h2.assetName:after {
 }
 
 .assetArtists {
-  margin: 0 0 10px;
+  margin: 5px 0 0;
   line-height: 1.1;
 }
 
@@ -161,7 +161,7 @@ h2.assetName:after {
 }
 
 @media screen and (max-width: 600px) {
-  .teaser {
+  .teaser:not(.trendingAsset) {
     max-width: inherit;
     display: inline-block;
     vertical-align: middle;
@@ -192,6 +192,8 @@ h2.assetName:after {
   }
   h2.assetName {
     height: inherit;
+    overflow: inherit;
+    max-height: inherit;
   }
   .assetArtists {
     margin: 0;

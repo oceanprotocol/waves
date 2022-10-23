@@ -120,6 +120,14 @@
     width: 100%;
     padding: 0;
   }
+
+  .songPriceBuy {
+    background: #1a1a1a;
+    padding: 20px;
+    max-width: inherit;
+    width: calc((var(--spacer) / 3) * 2 + 100%);
+    margin-left: calc(0px - var(--spacer) / 3);
+  }
 }
 
 @media (max-width: 700px) and (min-width: 450px) {

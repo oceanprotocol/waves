@@ -5,9 +5,10 @@ import Clipboard from 'react-clipboard.js'
 
 export interface CopyProps {
   text: string
+  big?: boolean
 }
 
-export default function Copy({ text }: CopyProps): ReactElement {
+export default function Copy({ text, big }: CopyProps): ReactElement {
   const [isCopied, setIsCopied] = useState(false)
 
   // Clear copy success style after 5 sec.

@@ -32,12 +32,6 @@
   overflow-x: auto;
 }
 
-.tabs div[class*='tabContent'] {
-  border: 1px solid var(--border-color);
-  border-top: 0;
-  padding-bottom: 0;
-}
-
 .tabs div[class*='tab-panel--selected'] {
   margin-bottom: var(--spacer);
 }

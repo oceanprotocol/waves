@@ -71,7 +71,7 @@ export default function AssetContent({
                 </>
               )}
             </span>
-            {asset.stats.orders > 0 && (
+            {asset?.stats?.orders > 0 && (
               <span>
                 Purchased by {asset.stats.orders} user
                 {asset.stats.orders > 1 && 's'}
