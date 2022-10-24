@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import HistoryPage from './History'
 import AccountHeader from './Header'
 import cx from 'classnames'
@@ -6,9 +6,11 @@ import styles from './history.module.css'
 import OwnedAssetList from '@shared/OwnedAssetList/OwnedAssetList'
 
 export default function AccountPage({
-  accountId
+  accountId,
+  myProfileId
 }: {
   accountId: string
+  myProfileId: string
 }): ReactElement {
   const [activeTab, setActiveTab] = useState<'uploads' | 'owned'>('uploads')
 
@@ -16,19 +18,28 @@ export default function AccountPage({
     setActiveTab(tabname)
   }
 
+  const showOwned = useCallback(() => {
+    if (myProfileId && myProfileId === accountId) return true
+    return false
+  }, [accountId, myProfileId])
+
+  console.log(myProfileId)
+
   return (
     <>
       <AccountHeader accountId={accountId} />
       <div className={styles.tabsButtons}>
         <button
           className={cx(
-            activeTab === 'uploads' && accountId ? styles.active : ''
+            activeTab === 'uploads' && showOwned() && accountId
+              ? styles.active
+              : ''
           )}
           onClick={() => handleTabChange('uploads')}
         >
           Uploads
         </button>
-        {accountId && (
+        {showOwned() && (
           <button
             className={cx(activeTab === 'owned' ? styles.active : '')}
             onClick={() => handleTabChange('owned')}
@@ -40,6 +51,7 @@ export default function AccountPage({
       {activeTab === 'uploads' ? (
         <HistoryPage accountIdentifier={accountId} />
       ) : (
+        showOwned() &&
         activeTab === 'owned' && (
           <>
             <OwnedAssetList />
