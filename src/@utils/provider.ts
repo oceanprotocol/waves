@@ -145,7 +145,7 @@ async function requestAuthToken(
   accountId: string,
   expiration: string
 ) {
-  const nonce = await ProviderInstance.getNonce(baseUrl, accountId)
+  const nonce = Date.now() // await ProviderInstance.getNonce(baseUrl, accountId)
   const signature = await ProviderInstance.signProviderRequest(
     web3,
     accountId,
@@ -163,7 +163,7 @@ async function requestAuthToken(
   const url = new URL(baseUrl + route)
 
   Object.entries(params).forEach(([key, value]) =>
-    url.searchParams.append(key, value)
+    url.searchParams.append(key, String(value))
   )
 
   return fetch(url, {
