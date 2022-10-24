@@ -22,7 +22,6 @@ export default function AssetTeaser({
   trendingList
 }: AssetTeaserProps): ReactElement {
   const { name, additionalInformation } = asset.metadata
-
   return (
     <article
       className={cx(styles.teaser, trendingList && styles.trendingAsset)}

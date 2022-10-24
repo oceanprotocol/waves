@@ -205,6 +205,11 @@ svg.caret {
   margin-left: 15px;
 }
 
+.headerMenuWrapper {
+  max-width: var(--break-point--medium);
+  margin: 0 auto;
+}
+
 .headerMenuWrapper.activeMenu {
   position: fixed;
   top: 0;
