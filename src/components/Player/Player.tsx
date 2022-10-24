@@ -13,7 +13,7 @@ export default function Player(): ReactElement {
       // layout="horizontal"
       header={
         <div className={s.songDetails}>
-          <div>album: {songData?.album}</div>
+          <div>{songData?.album}</div>
           <img
             style={{ margin: 0 }}
             width={60}
