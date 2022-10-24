@@ -6,7 +6,6 @@ import s from './Player.module.css'
 
 export default function Player(): ReactElement {
   const { song, loading, close, songData } = usePlayerContext()
-  console.log('song', song)
 
   const player = (
     <AudioPlayer

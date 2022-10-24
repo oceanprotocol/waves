@@ -110,7 +110,6 @@ export default function HomePage(): ReactElement {
           }
         />
       )}
-
       {/* <PublishersWithMostSales title="Publishers With Most Sales" /> */}
     </>
   )

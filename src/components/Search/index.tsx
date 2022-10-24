@@ -1,13 +1,33 @@
 import React, { ReactElement, useState, useEffect, useCallback } from 'react'
 import AssetList from '@shared/AssetList'
 import queryString from 'query-string'
-import Filters from './Filters'
+// import Filters from './Filters'
 import Sort from './sort'
 import { getResults, updateQueryStringParameter } from './utils'
 import { useUserPreferences } from '@context/UserPreferences'
 import { useCancelToken } from '@hooks/useCancelToken'
-import styles from './index.module.css'
+import s from './index.module.css'
 import { useRouter } from 'next/router'
+import Tags from '@shared/atoms/Tags'
+import cx from 'classnames'
+
+const options = [
+  'pop',
+  'hip-hop',
+  'rock',
+  'rap',
+  'blues',
+  'soul',
+  'reggae',
+  'country',
+  'funk',
+  'folk',
+  'jazz',
+  'disco',
+  'classical',
+  'electronic',
+  'other'
+]
 
 export default function SearchPage({
   setTotalResults,
@@ -21,8 +41,8 @@ export default function SearchPage({
   const { chainIds } = useUserPreferences()
   const [queryResult, setQueryResult] = useState<PagedAssets>()
   const [loading, setLoading] = useState<boolean>()
-  const [serviceType, setServiceType] = useState<string>()
-  const [accessType, setAccessType] = useState<string>()
+  // const [serviceType, setServiceType] = useState<string>()
+  // const [accessType, setAccessType] = useState<string>()
   const [sortType, setSortType] = useState<string>()
   const [sortDirection, setSortDirection] = useState<string>()
   const newCancelToken = useCancelToken()
@@ -31,8 +51,8 @@ export default function SearchPage({
     const parsed = queryString.parse(location.search)
     const { sort, sortOrder, serviceType, accessType } = parsed
     setParsed(parsed)
-    setServiceType(serviceType as string)
-    setAccessType(accessType as string)
+    // setServiceType(serviceType as string)
+    // setAccessType(accessType as string)
     setSortDirection(sortOrder as string)
     setSortType(sort as string)
   }, [router])
@@ -81,15 +101,11 @@ export default function SearchPage({
 
   return (
     <>
-      <div className={styles.search}>
-        <div className={styles.row}>
-          <Filters
-            serviceType={serviceType}
-            accessType={accessType}
-            setServiceType={setServiceType}
-            setAccessType={setAccessType}
-            addFiltersToUrl
-          />
+      <div className={s.search}>
+        <div className={s.row}>
+          <Tags items={options} />
+        </div>
+        <div className={cx(s.row, s.alignRight)}>
           <Sort
             sortType={sortType}
             sortDirection={sortDirection}
@@ -98,7 +114,7 @@ export default function SearchPage({
           />
         </div>
       </div>
-      <div className={styles.results}>
+      <div className={s.results}>
         <AssetList
           assets={queryResult?.results}
           showPagination

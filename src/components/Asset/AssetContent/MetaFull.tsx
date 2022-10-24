@@ -32,10 +32,6 @@ export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
             title="Album"
             content={ddo?.metadata?.additionalInformation.album}
           />
-          <MetaItem
-            title="Genre"
-            content={ddo?.metadata?.additionalInformation.genre}
-          />
           <img
             style={{ margin: 0 }}
             width={100}
