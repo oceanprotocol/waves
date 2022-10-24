@@ -17,9 +17,11 @@ import { FormPublishData } from 'src/components/Publish/_types'
 import { getTokenBalanceFromSymbol } from '@utils/web3'
 
 export default function AssetActions({
-  asset
+  asset,
+  onAssetPage
 }: {
   asset: AssetExtended
+  onAssetPage: boolean
 }): ReactElement {
   const { accountId, balance, web3 } = useWeb3()
   const { isAssetNetwork } = useAsset()
@@ -141,6 +143,7 @@ export default function AssetActions({
           isBalanceSufficient={isBalanceSufficient}
           file={fileMetadata}
           fileIsLoading={fileIsLoading}
+          onAssetPage={onAssetPage}
         />
       )}
     </>

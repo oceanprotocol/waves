@@ -25,7 +25,8 @@ export default function Download({
   isBalanceSufficient,
   dtBalance,
   // fileIsLoading,
-  consumableFeedback
+  consumableFeedback,
+  onAssetPage
 }: {
   asset: AssetExtended
   file: FileInfo
@@ -33,6 +34,7 @@ export default function Download({
   dtBalance: string
   fileIsLoading?: boolean
   consumableFeedback?: string
+  onAssetPage?: boolean
 }): ReactElement {
   const { accountId, web3 } = useWeb3()
   const { getOpcFeeForToken } = useMarketMetadata()
@@ -214,14 +216,13 @@ export default function Download({
               {isPriceLoading ? (
                 <Loader message="Calculating full price (including fees)" />
               ) : (
-                isOwner && (
-                  <Price
-                    accessDetails={asset.accessDetails}
-                    orderPriceAndFees={orderPriceAndFees}
-                    conversion
-                    size="large"
-                  />
-                )
+                <Price
+                  accessDetails={asset.accessDetails}
+                  orderPriceAndFees={orderPriceAndFees}
+                  conversion
+                  size="large"
+                  onAssetPage={onAssetPage}
+                />
               )}
             </div>
 
