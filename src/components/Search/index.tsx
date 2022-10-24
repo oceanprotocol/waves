@@ -13,7 +13,7 @@ import cx from 'classnames'
 
 const options = [
   'pop',
-  'hip-Hop',
+  'hip-hop',
   'rock',
   'rap',
   'blues',
