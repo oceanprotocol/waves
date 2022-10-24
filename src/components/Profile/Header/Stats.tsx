@@ -43,11 +43,15 @@ export default function Stats({
       <NumberUnit
         label="Total Sales"
         value={
-          <Conversion
-            price={totalSales}
-            symbol={'ocean'}
-            hideApproximateSymbol
-          />
+          totalSales === '0' ? (
+            '0'
+          ) : (
+            <Conversion
+              price={totalSales}
+              symbol={'ocean'}
+              hideApproximateSymbol
+            />
+          )
         }
       />
       <NumberUnit label={`Sale${sales === 1 ? '' : 's'}`} value={sales} />

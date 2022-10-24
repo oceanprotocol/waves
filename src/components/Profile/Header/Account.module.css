@@ -1,19 +1,12 @@
 .account {
-  text-align: center;
+  text-align: left;
+  display: inline-block;
+  vertical-align: middle;
+  width: 450px;
 }
 
 .account p {
   margin: 0;
-}
-
-@media (min-width: 40rem) {
-  .account {
-    text-align: left;
-    display: grid;
-    grid-template-columns: 0.2fr 1.8fr;
-    gap: calc(var(--spacer) / 2);
-    align-items: center;
-  }
 }
 
 /* Sledgehammer !important cause Next.js reordering of styles is clashing with
@@ -21,16 +14,18 @@ our Blockies implementation.
 See https://github.com/oceanprotocol/market/issues/1143 */
 .imageWrap,
 .image {
-  width: 96px !important;
-  height: 96px !important;
+  width: 100px !important;
+  height: 100px !important;
 }
 
 .imageWrap {
-  border-radius: 50%;
+  border-radius: 20px;
   overflow: hidden;
   margin-bottom: calc(var(--spacer) / 4);
   border: 1px solid var(--border-color);
   box-shadow: 0 6px 17px 0 var(--box-shadow-color);
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .image {
@@ -66,4 +61,31 @@ See https://github.com/oceanprotocol/market/issues/1143 */
 
 .explorer svg:last-child {
   margin-left: calc(var(--spacer) / 12);
+}
+
+.accountAdressInfo {
+  width: calc(100% - 100px);
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 20px;
+}
+
+@media (max-width: 850px) {
+  .account {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .imageWrap {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .accountAdressInfo {
+    width: 100%;
+    padding: 0;
+    margin-top: 20px;
+    text-align: center;
+  }
 }

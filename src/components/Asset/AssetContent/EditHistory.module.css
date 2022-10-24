@@ -2,6 +2,8 @@
   composes: title from './MetaItem.module.css';
   margin-top: var(--spacer);
   margin-bottom: calc(var(--spacer) / 2);
+  margin-bottom: 3px;
+  margin-top: 15px;
 }
 
 .history {

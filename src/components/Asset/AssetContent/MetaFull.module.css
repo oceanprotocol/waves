@@ -1,8 +1,7 @@
 .metaFull {
-  margin-top: var(--spacer);
   display: grid;
-  gap: var(--spacer);
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
 }
 
 .metaFull code {

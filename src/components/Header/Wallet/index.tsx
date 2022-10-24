@@ -16,6 +16,7 @@ export default function Wallet(): ReactElement {
         content={<Details />}
         trigger="click focus"
         disabled={!accountId}
+        className={styles.walletTooltip}
       >
         <Account />
       </Tooltip>

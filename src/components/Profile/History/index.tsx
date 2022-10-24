@@ -47,6 +47,11 @@ export default function HistoryPage({
   defaultTab === 'ComputeJobs' ? (defaultTabIndex = 4) : (defaultTabIndex = 0)
 
   return (
-    <Tabs items={tabs} className={styles.tabs} defaultIndex={defaultTabIndex} />
+    <Tabs
+      items={tabs}
+      className={styles.tabs}
+      defaultIndex={defaultTabIndex}
+      noPadding
+    />
   )
 }
