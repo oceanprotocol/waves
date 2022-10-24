@@ -1,14 +1,7 @@
 .assetList {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: calc(var(--spacer) / 2);
-}
-
-@media screen and (min-width: 25rem) {
-  .assetList {
-    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
-    gap: var(--assets-list-spacer);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--assets-list-spacer);
 }
 
 .empty {
@@ -23,15 +16,8 @@
   align-items: center;
 }
 
-@media screen and (max-width: 600px) {
-  .assetList {
-    grid-template-columns: inherit;
-    gap: var(--assets-list-spacer);
-  }
-}
-
 .trendingList.assetList {
-  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 700px) {

@@ -205,6 +205,11 @@ svg.caret {
   margin-left: 15px;
 }
 
+.headerMenuWrapper {
+  max-width: var(--break-point--medium);
+  margin: 0 auto;
+}
+
 .headerMenuWrapper.activeMenu {
   position: fixed;
   top: 0;
@@ -261,6 +266,16 @@ svg.caret {
   margin-top: 10px;
   max-height: 100%;
   padding: 0 10px;
+}
+
+.logo {
+  transition: 0.2s all ease-in-out;
+  overflow: hidden;
+  width: 170px;
+}
+
+.hiddenLogo {
+  width: 0;
 }
 
 @media (min-width: 600px) {

@@ -1,6 +1,7 @@
 .teaser:not(.trendingAsset) {
   max-width: 140px;
   height: 100%;
+  width: 140px;
 }
 
 .container {
@@ -134,6 +135,14 @@ h2.assetName:after {
   display: none;
 }
 
+.trendingAsset {
+  width: calc(100% / 4 - var(--assets-list-spacer));
+}
+
+.trendingAsset:last-child {
+  margin-right: 0;
+}
+
 .trendingAsset .assetimage {
   padding-bottom: 230px;
   margin: 0;
@@ -160,12 +169,29 @@ h2.assetName:after {
   margin: 0;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 825px) {
+  .teaser:not(.trendingAsset) {
+    max-width: inherit;
+    width: calc(100% / 4 - var(--assets-list-spacer));
+  }
+}
+@media screen and (max-width: 650px) {
+  .teaser:not(.trendingAsset) {
+    width: calc(100% / 3 - var(--assets-list-spacer));
+  }
+}
+@media screen and (max-width: 550px) {
+  .teaser:not(.trendingAsset) {
+    width: calc(100% / 2 - var(--assets-list-spacer));
+  }
+}
+@media screen and (max-width: 400px) {
   .teaser:not(.trendingAsset) {
     max-width: inherit;
     display: inline-block;
     vertical-align: middle;
     margin-bottom: 10px;
+    width: 100%;
   }
   .link {
     width: 100%;

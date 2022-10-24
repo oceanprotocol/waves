@@ -17,7 +17,6 @@
 }
 
 .tabs {
-  margin-top: var(--spacer);
   background-color: var(--background-body);
 }
 

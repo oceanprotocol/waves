@@ -7,7 +7,6 @@ import { useUserPreferences } from '@context/UserPreferences'
 import { SortTermOptions } from '../../@types/aquarius/SearchQuery'
 // import PublishersWithMostSales from './PublishersWithMostSales'
 import SectionQueryResult from './SectionQueryResult'
-import cx from 'classnames'
 import styles from './index.module.css'
 import Link from 'next/link'
 import { useWeb3 } from '@context/Web3'
@@ -16,7 +15,6 @@ export default function HomePage(): ReactElement {
   const [queryLatest, setQueryLatest] = useState<SearchQuery>()
   const [queryMostSales, setQueryMostSales] = useState<SearchQuery>()
   const { chainIds } = useUserPreferences()
-  const [activeTab, setActiveTab] = useState<'recently' | 'owned'>('recently')
   const { accountId } = useWeb3()
 
   useEffect(() => {
@@ -47,10 +45,6 @@ export default function HomePage(): ReactElement {
     console.log('queryLatest', queryLatest)
   }, [queryLatest])
 
-  const handleTabChange = (tabname: 'recently' | 'owned') => {
-    setActiveTab(tabname)
-  }
-
   return (
     <>
       {/* <section className={styles.section}>
@@ -72,44 +66,16 @@ export default function HomePage(): ReactElement {
         <SectionQueryResult query={queryMostSales} trendingList />
       </div>
       <div className={styles.tabsButtons}>
-        <button
-          className={cx(
-            activeTab === 'recently' && accountId ? styles.active : ''
-          )}
-          onClick={() => handleTabChange('recently')}
-        >
-          Recently
-        </button>
-        {accountId && (
-          <button
-            className={cx(activeTab === 'owned' ? styles.active : '')}
-            onClick={() => handleTabChange('owned')}
-            disabled
-          >
-            Owned
-          </button>
-        )}
+        <button>Recently</button>
       </div>
-      {activeTab === 'recently' ? (
-        <SectionQueryResult
-          query={queryLatest}
-          action={
-            <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
-              All audio files →
-            </Button>
-          }
-        />
-      ) : (
-        // TODO: filter datasets that user owns
-        <SectionQueryResult
-          query={queryLatest}
-          action={
-            <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
-              All audio files →
-            </Button>
-          }
-        />
-      )}
+      <SectionQueryResult
+        query={queryLatest}
+        action={
+          <Button style="text" to="/search?sort=nft.created&sortOrder=desc">
+            All audio files →
+          </Button>
+        }
+      />
       {/* <PublishersWithMostSales title="Publishers With Most Sales" /> */}
     </>
   )
