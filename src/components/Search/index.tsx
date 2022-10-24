@@ -6,7 +6,7 @@ import Sort from './sort'
 import { getResults, updateQueryStringParameter } from './utils'
 import { useUserPreferences } from '@context/UserPreferences'
 import { useCancelToken } from '@hooks/useCancelToken'
-import s from './index.module.css'
+import styles from './index.module.css'
 import { useRouter } from 'next/router'
 import Tags from '@shared/atoms/Tags'
 import cx from 'classnames'
@@ -49,7 +49,7 @@ export default function SearchPage({
 
   useEffect(() => {
     const parsed = queryString.parse(location.search)
-    const { sort, sortOrder, serviceType, accessType } = parsed
+    const { sort, sortOrder } = parsed
     setParsed(parsed)
     // setServiceType(serviceType as string)
     // setAccessType(accessType as string)
@@ -101,11 +101,11 @@ export default function SearchPage({
 
   return (
     <>
-      <div className={s.search}>
-        <div className={s.row}>
+      <div className={styles.search}>
+        <div className={cx(styles.row, styles.tagsFilters)}>
           <Tags items={options} />
         </div>
-        <div className={cx(s.row, s.alignRight)}>
+        <div className={cx(styles.row, styles.alignRight)}>
           <Sort
             sortType={sortType}
             sortDirection={sortDirection}
@@ -114,7 +114,7 @@ export default function SearchPage({
           />
         </div>
       </div>
-      <div className={s.results}>
+      <div className={styles.results}>
         <AssetList
           assets={queryResult?.results}
           showPagination

@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useCallback, useState } from 'react'
 import Link from 'next/link'
 import loadable from '@loadable/component'
 import Logo from '@shared/atoms/Logo'
@@ -47,6 +47,11 @@ export default function Menu(): ReactElement {
     setOpenedMenu(!openedMenu)
   }
 
+  const logoVisibility = useCallback(() => {
+    if ((!searchOpen && width <= 800) || width > 800) return true
+    return false
+  }, [searchOpen, width])
+
   return (
     <>
       {openedMenu && width <= 600 && (
@@ -68,7 +73,12 @@ export default function Menu(): ReactElement {
       >
         <nav className={styles.menu}>
           <Link href="/">
-            <a className={styles.logo}>
+            <a
+              className={cx(
+                styles.logo,
+                !logoVisibility() && styles.hiddenLogo
+              )}
+            >
               <Logo noWordmark />
               <h1 className={styles.title}>{siteContent?.siteTitle}</h1>
             </a>

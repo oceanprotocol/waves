@@ -3,6 +3,7 @@ import HistoryPage from './History'
 import AccountHeader from './Header'
 import cx from 'classnames'
 import styles from './history.module.css'
+import OwnedAssetList from '@shared/OwnedAssetList/OwnedAssetList'
 
 export default function AccountPage({
   accountId
@@ -14,6 +15,7 @@ export default function AccountPage({
   const handleTabChange = (tabname: 'uploads' | 'owned') => {
     setActiveTab(tabname)
   }
+
   return (
     <>
       <AccountHeader accountId={accountId} />
@@ -30,7 +32,6 @@ export default function AccountPage({
           <button
             className={cx(activeTab === 'owned' ? styles.active : '')}
             onClick={() => handleTabChange('owned')}
-            disabled
           >
             Owned
           </button>
@@ -40,8 +41,9 @@ export default function AccountPage({
         <HistoryPage accountIdentifier={accountId} />
       ) : (
         activeTab === 'owned' && (
-          // TODO: show owned songs list
-          <></>
+          <>
+            <OwnedAssetList />
+          </>
         )
       )}
     </>
