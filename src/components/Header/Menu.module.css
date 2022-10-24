@@ -268,6 +268,16 @@ svg.caret {
   padding: 0 10px;
 }
 
+.logo {
+  transition: 0.2s all ease-in-out;
+  overflow: hidden;
+  width: 170px;
+}
+
+.hiddenLogo {
+  width: 0;
+}
+
 @media (min-width: 600px) {
   .profileLink span {
     display: none;

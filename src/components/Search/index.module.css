@@ -10,12 +10,13 @@
 .alignRight {
   justify-content: flex-end;
 }
-.row > div {
-  margin-bottom: calc(var(--spacer) / 2);
-}
 
 @media (min-width: 55rem) {
   .row {
     flex-direction: row;
   }
+}
+
+.tagsFilters {
+  margin-bottom: 0;
 }
