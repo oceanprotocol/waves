@@ -64,7 +64,7 @@ export const initialValues: FormPublishData = {
     author: '',
     album: '',
     coverPicture: '',
-    genre: '',
+    genre: [],
     description: '',
     tags: '',
     termsAndConditions: false,
