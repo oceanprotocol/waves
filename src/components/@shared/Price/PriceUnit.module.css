@@ -44,3 +44,9 @@
   margin-left: calc(var(--spacer) / 6);
   background: var(--color-secondary);
 }
+
+.mainPrice {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 20px;
+}

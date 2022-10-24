@@ -6,13 +6,15 @@ export default function Price({
   orderPriceAndFees,
   className,
   size,
-  conversion
+  conversion,
+  onAssetPage
 }: {
   accessDetails: AccessDetails
   orderPriceAndFees?: OrderPriceAndFees
   className?: string
   conversion?: boolean
   size?: 'small' | 'mini' | 'large'
+  onAssetPage?: boolean
 }): ReactElement {
   const isSupported =
     accessDetails?.type === 'fixed' || accessDetails?.type === 'free'
@@ -25,6 +27,7 @@ export default function Price({
       size={size}
       conversion={conversion}
       type={accessDetails.type}
+      onAssetPage={onAssetPage}
     />
   ) : null
 }

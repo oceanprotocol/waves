@@ -3,7 +3,8 @@ import { formatCurrency } from '@coingecko/cryptoformat'
 import Conversion from './Conversion'
 import styles from './PriceUnit.module.css'
 import { useUserPreferences } from '@context/UserPreferences'
-import Badge from '@shared/atoms/Badge'
+// import Badge from '@shared/atoms/Badge'
+import cx from 'classnames'
 
 export function formatPrice(price: string, locale: string): string {
   return formatCurrency(Number(price), '', locale, false, {
@@ -20,7 +21,8 @@ export default function PriceUnit({
   size = 'small',
   conversion,
   symbol,
-  type
+  type,
+  onAssetPage
 }: {
   price: string
   type?: string
@@ -28,6 +30,7 @@ export default function PriceUnit({
   size?: 'small' | 'mini' | 'large'
   conversion?: boolean
   symbol?: string
+  onAssetPage?: boolean
 }): ReactElement {
   const { locale } = useUserPreferences()
 
@@ -37,7 +40,7 @@ export default function PriceUnit({
         <div>Free</div>
       ) : (
         <>
-          <div>
+          <div className={cx(onAssetPage && styles.mainPrice)}>
             {Number.isNaN(Number(price)) ? '-' : formatPrice(price, locale)}{' '}
             <span className={styles.symbol}>{symbol}</span>
           </div>

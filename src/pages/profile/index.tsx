@@ -62,7 +62,7 @@ export default function PageProfile(): ReactElement {
       noPageHeader
     >
       <ProfileProvider accountId={finalAccountId} accountEns={finalAccountEns}>
-        <ProfilePage accountId={finalAccountId} />
+        <ProfilePage accountId={finalAccountId} myProfileId={accountId} />
       </ProfileProvider>
     </Page>
   )

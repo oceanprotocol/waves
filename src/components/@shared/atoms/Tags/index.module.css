@@ -28,3 +28,14 @@
   font-size: var(--font-size-mini);
   margin-left: calc(var(--spacer) / 8);
 }
+
+.smallTag {
+  border: none;
+  padding: 0;
+  margin: 0 3px 0 0;
+  display: inline;
+}
+
+.smallTag:not(:last-child):after {
+  content: ',';
+}

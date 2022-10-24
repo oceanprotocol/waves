@@ -30,14 +30,13 @@ export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
               ddo?.metadata?.additionalInformation.genre
                 ? ddo?.metadata?.additionalInformation.genre
                 : ddo?.metadata.tags.length > 0 && (
-                    <Tags items={ddo?.metadata?.tags} />
+                    <Tags small items={ddo?.metadata?.tags} />
                   )
             }
           />
           <MetaItem
             title="Owned by"
             content={<Publisher account={ddo?.nft?.owner} />}
-
           />
         </div>
       )}
