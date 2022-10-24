@@ -163,6 +163,7 @@ export default function Menu(): ReactElement {
                     siteContent.menu.find(({ name }) => name === 'Profile').link
                   }
                   className={styles.profileLink}
+                  onClick={handleOpenMenu}
                 >
                   <UserProfile width={20} height={20} /> <span>My Profile</span>
                 </a>
@@ -181,6 +182,7 @@ export default function Menu(): ReactElement {
                     siteContent.menu.find(({ name }) => name === 'Publish').link
                   }
                   className={styles.publishBtn}
+                  onClick={handleOpenMenu}
                 >
                   <PublishIcon />
                   <span>Publish</span>

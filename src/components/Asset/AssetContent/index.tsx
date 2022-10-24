@@ -79,7 +79,7 @@ export default function AssetContent({
             )}
           </div>
           <div className={styles.songPriceBuy}>
-            <AssetActions asset={asset} />
+            <AssetActions asset={asset} onAssetPage />
             <NetworkName
               networkId={asset?.chainId}
               className={styles.network}
