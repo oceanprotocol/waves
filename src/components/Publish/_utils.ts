@@ -71,7 +71,7 @@ export async function transformPublishFormToDdo(
     genre,
     artist,
     album,
-    tags,
+    // tags,
     author,
     termsAndConditions,
     dockerImage,
@@ -80,6 +80,8 @@ export async function transformPublishFormToDdo(
     dockerImageCustomEntrypoint
     // dockerImageCustomChecksum
   } = metadata
+
+  console.log('metadata', metadata)
   const { access, files, links, providerUrl, timeout } = services[0]
 
   const did = nftAddress ? generateDid(nftAddress, chainId) : '0x...'
@@ -98,7 +100,7 @@ export async function transformPublishFormToDdo(
     type,
     name,
     description,
-    tags: transformTags(tags),
+    tags: transformTags(genre.join(',')),
     author,
     license: 'https://market.oceanprotocol.com/terms',
     links: linksTransformed,
@@ -108,7 +110,6 @@ export async function transformPublishFormToDdo(
       artist,
       album,
       coverPicture,
-      genre,
       title: name
     },
     ...(type === 'algorithm' &&

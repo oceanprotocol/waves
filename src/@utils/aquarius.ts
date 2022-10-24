@@ -324,8 +324,8 @@ export async function getPublishedAssets(
     },
     ignorePurgatory: true,
     esPaginationOptions: {
-      from: (Number(page) - 1 || 0) * 9,
-      size: 9
+      from: (Number(page) - 1 || 0) * 10,
+      size: 10
     }
   } as BaseQueryParams
 
@@ -379,8 +379,8 @@ export async function getTopPublishers(
       }
     },
     esPaginationOptions: {
-      from: (Number(page) - 1 || 0) * 9,
-      size: 9
+      from: (Number(page) - 1 || 0) * 10,
+      size: 10
     }
   } as BaseQueryParams
 

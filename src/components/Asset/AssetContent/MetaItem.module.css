@@ -6,12 +6,18 @@
   font-family: var(--font-family-base);
   font-weight: var(--font-weight-base);
   font-size: var(--font-size-small);
-  margin-bottom: calc(var(--spacer) / 4);
-  color: var(--color-secondary);
-  text-transform: uppercase;
+  margin-bottom: 3px;
+  color: var(--fields-background);
+  font-weight: 900;
+  font-size: 12px;
 }
 
 .content {
   word-wrap: break-word;
   white-space: normal;
+}
+
+.content code {
+  padding: 0;
+  word-break: break-all;
 }

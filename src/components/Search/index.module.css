@@ -7,7 +7,9 @@
   white-space: nowrap;
   margin-bottom: calc(var(--spacer) / 2);
 }
-
+.alignRight {
+  justify-content: flex-end;
+}
 .row > div {
   margin-bottom: calc(var(--spacer) / 2);
 }

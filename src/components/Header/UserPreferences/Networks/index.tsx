@@ -49,6 +49,7 @@ export default function Networks(): ReactElement {
     >
       <>
         <GlobeSettings width={28} height={22} />
+        <span>Currency & network settings</span>
       </>
     </Tooltip>
   )

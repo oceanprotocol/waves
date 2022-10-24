@@ -1,14 +1,11 @@
 .consume {
   width: auto;
-  margin-bottom: calc(var(--spacer) / 2);
-  margin-top: -1rem;
-  margin-left: -2rem;
+  margin: 10px 0;
 }
 
 .info {
   display: flex;
   width: auto;
-  padding: 0 calc(var(--spacer) / 2) 0 calc(var(--spacer) * 1.5);
 }
 
 .filewrapper {

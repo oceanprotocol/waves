@@ -15,7 +15,6 @@ import styles from './index.module.css'
 import { useFormikContext } from 'formik'
 import { FormPublishData } from 'src/components/Publish/_types'
 import { getTokenBalanceFromSymbol } from '@utils/web3'
-import AssetStats from './AssetStats'
 
 export default function AssetActions({
   asset
@@ -144,7 +143,6 @@ export default function AssetActions({
           fileIsLoading={fileIsLoading}
         />
       )}
-      <AssetStats />
     </>
   )
 
@@ -152,7 +150,7 @@ export default function AssetActions({
 
   return (
     <>
-      <Tabs items={tabs} className={styles.actions} />
+      <Tabs items={tabs} className={styles.actions} noPadding />
       <Web3Feedback
         networkId={asset?.chainId}
         isAssetNetwork={isAssetNetwork}

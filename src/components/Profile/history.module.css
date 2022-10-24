@@ -1,0 +1,36 @@
+.tabsButtons {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.tabsButtons button {
+  background: none;
+  border: none;
+  color: white;
+  font-family: var(--font-family-heading);
+  font-size: 20px;
+  position: relative;
+  padding: 0 0 5px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.tabsButtons button.active {
+  font-weight: bold;
+}
+
+.tabsButtons button:disabled {
+  opacity: 0.2;
+}
+
+.tabsButtons button.active:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: 100px;
+}

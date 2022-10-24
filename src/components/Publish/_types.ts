@@ -38,7 +38,7 @@ export interface FormPublishData {
     artist: string
     album: string
     coverPicture: string
-    genre: string
+    genre: string[]
     tags?: string
     dockerImage?: string
     dockerImageCustom?: string

@@ -54,7 +54,11 @@ export default function InputElement({
   /* eslint-enable @typescript-eslint/no-unused-vars */
   ...props
 }: InputProps): ReactElement {
-  const styleClasses = cx({ select: true, [size]: size })
+  const styleClasses = cx({
+    select: !multiple,
+    multipleSelect: multiple,
+    [size]: size
+  })
   switch (props.type) {
     case 'select': {
       const sortedOptions =

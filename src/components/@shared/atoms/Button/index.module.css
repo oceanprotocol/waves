@@ -11,7 +11,7 @@
   font-family: var(--font-family-base);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
-  border-radius: var(--border-radius);
+  border-radius: 100px;
   transition: 0.2s ease-out;
   color: var(--brand-white);
   background: var(--fields-background);
@@ -67,7 +67,7 @@
   padding: 0;
   display: inline-block;
   background: 0;
-  color: var(--brand-pink);
+  color: var(--color-primary);
   box-shadow: none;
   cursor: pointer;
   min-width: auto;
@@ -85,7 +85,7 @@
   box-shadow: none;
   cursor: pointer;
   min-width: auto;
-  background: var(--brand-gradient);
+  background: var(--color-primary);
 }
 
 /* Size Modifiers */

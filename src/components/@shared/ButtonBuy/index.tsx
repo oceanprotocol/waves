@@ -2,6 +2,7 @@ import React, { FormEvent, ReactElement } from 'react'
 import Button from '../atoms/Button'
 import styles from './index.module.css'
 import Loader from '../atoms/Loader'
+import cx from 'classnames'
 
 interface ButtonBuyProps {
   action: 'download' | 'compute'
@@ -30,6 +31,7 @@ interface ButtonBuyProps {
   algorithmPriceType?: string
   isAlgorithmConsumable?: boolean
   hasProviderFee?: boolean
+  fullWidth?: boolean
 }
 
 // TODO: we need to take a look at these messages
@@ -133,7 +135,8 @@ export default function ButtonBuy({
   priceType,
   algorithmPriceType,
   isAlgorithmConsumable,
-  hasProviderFee
+  hasProviderFee,
+  fullWidth
 }: ButtonBuyProps): ReactElement {
   const buttonText =
     action === 'download'
@@ -156,25 +159,8 @@ export default function ButtonBuy({
         <Loader message={stepText} />
       ) : (
         <>
-          <div style={{ display: 'flex', gap: 20 }}>
-            {onPlay && buttonText === 'Download' && (
-              <Button disabled={disabled} style="thin" onClick={onPlay}>
-                ▶ Play
-              </Button>
-            )}
-            {buttonText !== 'Download' && (
-              <Button
-                style={buttonText === 'Download' ? 'text' : 'primary'}
-                type={type}
-                onClick={onClick}
-                disabled={disabled}
-                className={action === 'compute' ? styles.actionsCenter : ''}
-              >
-                {buttonText}
-              </Button>
-            )}
-          </div>
           <div className={styles.help}>
+            *
             {action === 'download'
               ? getConsumeHelpText(
                   btSymbol,
@@ -205,6 +191,32 @@ export default function ButtonBuy({
                   isAlgorithmConsumable,
                   hasProviderFee
                 )}
+          </div>
+          <div style={{ display: 'flex', gap: 20 }}>
+            {onPlay && buttonText === 'Download' && (
+              <Button
+                disabled={disabled}
+                style="thin"
+                onClick={onPlay}
+                className={cx(fullWidth && styles.fullWidth)}
+              >
+                ▶ Play
+              </Button>
+            )}
+            {buttonText !== 'Download' && (
+              <Button
+                style={buttonText === 'Download' ? 'text' : 'primary'}
+                type={type}
+                onClick={onClick}
+                disabled={disabled}
+                className={cx(
+                  action === 'compute' ? styles.actionsCenter : '',
+                  fullWidth && styles.fullWidth
+                )}
+              >
+                {buttonText}
+              </Button>
+            )}
           </div>
         </>
       )}

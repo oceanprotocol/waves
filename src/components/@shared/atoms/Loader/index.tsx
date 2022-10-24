@@ -9,7 +9,7 @@ export interface LoaderProps {
 export default function Loader({ message, white }: LoaderProps): ReactElement {
   return (
     <div className={styles.loaderWrap}>
-      <span className={`${styles.loader} ${white ? styles.white : ''}`} />
+      <span className={`${styles.loader} ${styles.white}`} />
       {message && <span className={styles.message}>{message}</span>}
     </div>
   )

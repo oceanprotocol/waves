@@ -16,7 +16,7 @@ type SongDataType = {
 
 type UsePlayerType = {
   song: string
-  play: (url: string, songData: SongDataType) => void
+  play: (url: string, songData: SongDataType, blob?: boolean) => void
   loading: boolean
   close: () => void
   songData: SongDataType
@@ -52,9 +52,14 @@ export const PlayerProvider: React.FC<Props> = ({ children }) => {
 
   const play = (
     url: string,
-    data: SongDataType & { [key: string]: string }
+    data: SongDataType & { [key: string]: string },
+    isBlob?: boolean
   ) => {
     setSongData(data)
+    if (isBlob) {
+      setSong(url)
+      return
+    }
     setAssetUrl(url)
   }
 

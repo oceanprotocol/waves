@@ -40,10 +40,6 @@
   margin-left: auto;
 }
 
-.title {
-  display: none;
-}
-
 @media screen and (min-width: 42rem) {
   .menu {
     padding: calc(var(--spacer) / 2);
@@ -67,14 +63,14 @@
   .menu {
     padding: var(--spacer);
   }
+}
 
-  .title {
-    margin: 0;
-    display: block;
-    color: white;
-    font-size: var(--font-size-h4);
-    margin-right: calc(var(--spacer) / 6);
-  }
+.title {
+  font-size: var(--font-size-h4);
+  margin: 0;
+  display: block;
+  color: white;
+  margin-right: calc(var(--spacer) / 6);
 }
 
 .navigation {
@@ -207,4 +203,100 @@ svg.caret {
   display: inline-block;
   vertical-align: middle;
   margin-left: 15px;
+}
+
+.headerMenuWrapper.activeMenu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--background-content);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.hamburgerMenu {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+
+.hamburgerMenu span {
+  width: 30px;
+  height: 1px;
+  background-color: #ecf0f1;
+  display: block;
+  margin: 6px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburgerMenu:hover {
+  cursor: pointer;
+}
+
+.hamburgerMenu.activeMenu span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerMenu.activeMenu span:nth-child(1) {
+  -webkit-transform: translateY(6px) rotate(45deg);
+  -ms-transform: translateY(6px) rotate(45deg);
+  -o-transform: translateY(6px) rotate(45deg);
+  transform: translateY(6px) rotate(45deg);
+}
+
+.hamburgerMenu.activeMenu span:nth-child(3) {
+  -webkit-transform: translateY(-9px) rotate(-45deg);
+  -ms-transform: translateY(-9px) rotate(-45deg);
+  -o-transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+.mobileMenuInner {
+  width: 100%;
+  margin-top: 10px;
+  max-height: 100%;
+  padding: 0 10px;
+}
+
+@media (min-width: 600px) {
+  .profileLink span {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .profileLink {
+    background: #252425;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 0 0 10px;
+  }
+  .profileLink svg {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0;
+    width: 25px;
+  }
+  .profileLink span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    color: white;
+  }
+  .publishBtn {
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 0 0 10px;
+  }
 }
