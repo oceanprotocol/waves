@@ -6,3 +6,32 @@
   cursor: pointer;
   margin-left: 15px;
 }
+
+.networks span {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .networks {
+    background: #252425;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 0 0 10px;
+  }
+
+  .networks svg {
+    display: inline-block;
+    vertical-align: middle;
+    width: 30px;
+    margin-left: -2.5px;
+  }
+
+  .networks span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+  }
+}

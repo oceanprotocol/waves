@@ -66,3 +66,38 @@
   display: inline-block;
   vertical-align: middle;
 }
+
+.button.initial span {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .button {
+    width: 100%;
+    text-align: left;
+  }
+  .button:not(.initial) svg {
+    float: right;
+  }
+  .button.initial svg {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .button.initial > span {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-weight: initial;
+    text-transform: initial;
+    font-size: initial;
+    color: white;
+  }
+  .walletIcon {
+    width: 25px;
+    height: 25px;
+  }
+  .address {
+    margin: 0 0 0 10px;
+    font-size: initial;
+  }
+}
