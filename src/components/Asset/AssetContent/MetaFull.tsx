@@ -37,6 +37,7 @@ export default function MetaFull({ ddo }: { ddo: Asset }): ReactElement {
           <MetaItem
             title="Owned by"
             content={<Publisher account={ddo?.nft?.owner} />}
+
           />
         </div>
       )}

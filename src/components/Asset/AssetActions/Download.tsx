@@ -9,11 +9,7 @@ import AlgorithmDatasetsListForCompute from './Compute/AlgorithmDatasetsListForC
 import styles from './Download.module.css'
 import { FileInfo, LoggerInstance, ZERO_ADDRESS } from '@oceanprotocol/lib'
 import { order } from '@utils/order'
-import {
-  // authTest,
-  downloadFile,
-  getFileUrl
-} from '@utils/provider'
+import { downloadFile, getFileBlobUrlWithAuth } from '@utils/provider'
 import { getOrderFeedback } from '@utils/feedback'
 import { getOrderPriceAndFees } from '@utils/accessDetailsAndPricing'
 import { toast } from 'react-toastify'
@@ -170,11 +166,14 @@ export default function Download({
   }
 
   function handlePlay() {
-    // authTest(web3, asset, accountId, validOrderTx).then((url) => play(url))
-    console.log('asset', asset)
-    getFileUrl(web3, asset, accountId, validOrderTx).then((url) =>
-      play(url, asset.metadata.additionalInformation)
-    )
+    setIsLoading(true)
+    getFileBlobUrlWithAuth(web3, asset, accountId, validOrderTx)
+      .then((url) => {
+        play(url, asset.metadata.additionalInformation, true)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }
 
   const PurchaseButton = () => (
@@ -240,6 +239,7 @@ export default function Download({
           {/* <div className={styles.filewrapper}>
             <FileIcon file={file} isLoading={fileIsLoading} small />
           </div> */}
+
           <AssetAction asset={asset} />
         </div>
 

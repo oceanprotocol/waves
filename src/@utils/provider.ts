@@ -118,34 +118,6 @@ export async function getFileUrl(
   accountId: string,
   validOrderTx?: string
 ) {
-  // const url = asset.services[0].serviceEndpoint
-
-  // const nonce = await ProviderInstance.getNonce(url, accountId)
-  // console.log('nonce', nonce)
-
-  // const signature = await ProviderInstance.signProviderRequest(
-  //   web3,
-  //   accountId,
-  //   ' '
-  // )
-  // console.log('signature', signature)
-  // const endpoint = '/api/services/createAuthToken'
-  // const link =
-  //   url +
-  //   endpoint +
-  //   '?signature=' +
-  //   signature +
-  //   '&nonce=' +
-  //   nonce +
-  //   '&address=' +
-  //   accountId +
-  //   '&expiration=' +
-  //   '1670053210'
-
-  // fetch(link)
-  //   .then((response) => response.json())
-  //   .then((data) => console.log(data))
-
   const downloadUrl = await ProviderInstance.getDownloadUrl(
     asset.id,
     accountId,
@@ -158,38 +130,129 @@ export async function getFileUrl(
   return downloadUrl
 }
 
-export async function authTest(
+/* --------------------------------------------------------------
+  Get Blob with AuthToken
+-------------------------------------------------------------- */
+function getTimestampInSeconds(addDays = 0) {
+  return Math.floor(Date.now() / 1000) + addDays * 24 * 60 * 60
+}
+
+const WAVES_USER = 'WAVES_USER'
+
+async function requestAuthToken(
+  web3: Web3,
+  baseUrl: string,
+  accountId: string,
+  expiration: string
+) {
+  const nonce = await ProviderInstance.getNonce(baseUrl, accountId)
+  const signature = await ProviderInstance.signProviderRequest(
+    web3,
+    accountId,
+    `${accountId}${nonce}`
+  )
+  const route = '/api/services/createAuthToken'
+
+  const params = {
+    signature,
+    nonce,
+    address: accountId,
+    expiration
+  }
+
+  const url = new URL(baseUrl + route)
+
+  Object.entries(params).forEach(([key, value]) =>
+    url.searchParams.append(key, value)
+  )
+
+  return fetch(url, {
+    method: 'GET'
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      return data.token
+    })
+    .catch((error) => console.log(error))
+}
+
+async function genDownloadUrl(
+  did: string,
+  accountId: string,
+  serviceId: string,
+  fileIndex: number,
+  transferTxId: string,
+  providerUri: string
+): Promise<any> {
+  const providerEndpoints = await ProviderInstance.getEndpoints(providerUri)
+  const serviceEndpoints = await ProviderInstance.getServiceEndpoints(
+    providerUri,
+    providerEndpoints
+  )
+  const nonce = Date.now()
+  const downloadUrl = ProviderInstance.getEndpointURL(
+    serviceEndpoints,
+    'download'
+  )
+    ? ProviderInstance.getEndpointURL(serviceEndpoints, 'download').urlPath
+    : null
+  if (!downloadUrl) return null
+
+  let consumeUrl = downloadUrl
+  consumeUrl += `?fileIndex=${fileIndex}`
+  consumeUrl += `&documentId=${did}`
+  consumeUrl += `&transferTxId=${transferTxId}`
+  consumeUrl += `&serviceId=${serviceId}`
+  consumeUrl += `&consumerAddress=${accountId}`
+  consumeUrl += `&nonce=${nonce}`
+  consumeUrl += `&datatoken=""`
+
+  return consumeUrl
+}
+
+export async function getFileBlobUrlWithAuth(
   web3: Web3,
   asset: AssetExtended,
   accountId: string,
   validOrderTx?: string
 ) {
-  console.log('accountId', accountId)
-  const url = asset.services[0].serviceEndpoint
+  const baseUrl = asset.services[0].serviceEndpoint
 
-  const nonce = await ProviderInstance.getNonce(url, accountId)
-  console.log('nonce', nonce)
+  const localStorageKey = [WAVES_USER, baseUrl, accountId].join('_')
 
-  const signature = await ProviderInstance.signProviderRequest(
-    web3,
+  const user = JSON.parse(localStorage.getItem(localStorageKey))
+
+  if (!user?.token || Number(user?.expiration) < getTimestampInSeconds()) {
+    const expiration = String(getTimestampInSeconds(31))
+    const token = await requestAuthToken(web3, baseUrl, accountId, expiration)
+    localStorage.setItem(localStorageKey, JSON.stringify({ token, expiration }))
+  }
+
+  const downloadUrl = await genDownloadUrl(
+    asset.id,
     accountId,
-    'signed message'
+    asset.services[0].id,
+    0,
+    validOrderTx || asset.accessDetails.validOrderTx,
+    asset.services[0].serviceEndpoint
   )
-  console.log('signature', signature)
-  const endpoint = '/api/services/createAuthToken'
-  const link =
-    url +
-    endpoint +
-    '?signature=' +
-    signature +
-    '&nonce=' +
-    nonce +
-    '&address=' +
-    accountId +
-    '&expiration=' +
-    '1670053210'
 
-  fetch(link)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
+  const { token } = JSON.parse(localStorage.getItem(localStorageKey))
+
+  return fetch(downloadUrl, {
+    headers: {
+      AuthToken: token
+    }
+  })
+    .then((response) => {
+      return response.blob()
+    })
+    .then((blob) => {
+      const songBlob = URL.createObjectURL(blob)
+      return songBlob
+    })
+    .catch((error) => {
+      console.log('error', error)
+      return undefined
+    })
 }

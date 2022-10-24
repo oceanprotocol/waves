@@ -113,8 +113,7 @@ export default function MetadataFields(): ReactElement {
         {...getFieldContent('tags', content.metadata.fields)}
         component={Input}
         name="metadata.tags"
-      /> 
-      */}
+      /> */}
       <Field
         {...getFieldContent('genre', content.metadata.fields)}
         component={Input}

@@ -77,6 +77,12 @@
   background-repeat: no-repeat;
 }
 
+.multipleSelect {
+  composes: input;
+  height: 200px;
+}
+
+.multipleSelect:focus,
 .select:focus {
   outline: 0;
   font-family: var(--font-family-base);
