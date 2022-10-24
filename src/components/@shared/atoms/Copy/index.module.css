@@ -11,8 +11,9 @@
 .icon {
   fill: var(--color-secondary);
   transition: 0.15s ease-out;
-  width: 10px;
-  height: 10px;
+  width: 17px;
+  height: 17px;
+  margin-left: 5px;
 }
 
 .button:hover .icon {

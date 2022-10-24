@@ -1,7 +1,4 @@
 .grid {
-  composes: box from '@shared/atoms/Box.module.css';
-  background: var(--background-body-transparent);
-  backdrop-filter: blur(3px);
   position: relative;
 }
 
@@ -21,13 +18,6 @@
 }
 
 @media (min-width: 50rem) {
-  .grid {
-    display: grid;
-    gap: var(--spacer);
-    /* lazy golden ratio */
-    grid-template-columns: 1.618fr 1fr;
-  }
-
   .description {
     margin-top: calc(var(--spacer) / 2);
     -webkit-line-clamp: 7 !important;
@@ -48,7 +38,22 @@
 .meta {
   color: var(--color-secondary);
   font-size: var(--font-size-mini);
-  position: absolute;
-  right: calc(var(--spacer) / 3);
-  bottom: calc(var(--spacer) / 6);
+}
+
+.statsAccountWrap {
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 455px);
+  text-align: right;
+}
+
+.accountTopSection {
+  width: 100%;
+}
+
+@media (max-width: 850px) {
+  .statsAccountWrap {
+    width: 100%;
+    margin-top: 20px;
+  }
 }

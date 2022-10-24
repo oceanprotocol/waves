@@ -66,6 +66,10 @@
   }
 }
 
+.noPadding {
+  padding: 0;
+}
+
 @media (min-width: 60rem) {
   .tab {
     padding: calc(var(--spacer) / 8) var(--spacer);

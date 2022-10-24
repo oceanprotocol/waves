@@ -1,0 +1,22 @@
+.button {
+  padding: 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.button svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.button span {
+  color: white;
+  vertical-align: middle;
+  display: inline-block;
+  margin-left: 3px;
+}
+
+.root {
+  margin-bottom: 20px;
+}

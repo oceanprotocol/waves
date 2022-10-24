@@ -31,7 +31,7 @@ const Account = React.forwardRef((props, ref: any) => {
       ref={ref}
       onClick={(e) => e.preventDefault()}
     >
-      <Blockies accountId={accountId} />
+      <Blockies accountId={accountId} className={styles.walletIcon} />
       <span className={styles.address} title={accountId}>
         {accountTruncate(accountEns || accountId)}
       </span>
@@ -45,7 +45,7 @@ const Account = React.forwardRef((props, ref: any) => {
       // the Tippy to show in this state.
       ref={ref}
     >
-      <WalletsIcon width={25} height={25} />
+      <WalletsIcon width={25} height={25} /> <span>Connect wallet</span>
     </button>
   )
 })

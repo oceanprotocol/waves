@@ -3,3 +3,18 @@
   vertical-align: middle;
   margin-left: 10px;
 }
+
+@media (max-width: 600px) {
+  .wallet {
+    background: #252425;
+    border-radius: 5px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    margin: 0 0 10px;
+  }
+  .walletTooltip {
+    width: 100%;
+  }
+}

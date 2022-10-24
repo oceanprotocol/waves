@@ -33,14 +33,16 @@ export default function Account({
         )}
       </figure>
 
-      <div>
-        <h3 className={styles.name}>{profile?.name}</h3>
+      <div className={styles.accountAdressInfo}>
+        <h3 className={styles.name}>
+          {profile?.name} <Copy big text={accountId} />
+        </h3>
         {accountId && (
           <code
             className={styles.accountId}
             title={profile?.accountEns ? accountId : null}
           >
-            {profile?.accountEns || accountId} <Copy text={accountId} />
+            {profile?.accountEns || accountId}
           </code>
         )}
         <p>

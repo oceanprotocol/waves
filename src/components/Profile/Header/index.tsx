@@ -33,9 +33,27 @@ export default function AccountHeader({
 
   return (
     <div className={styles.grid}>
-      <div>
+      <div className={styles.accountTopSection}>
         <Account accountId={accountId} />
-        <Stats accountId={accountId} />
+        <div className={styles.statsAccountWrap}>
+          <Stats accountId={accountId} />
+          <div className={styles.meta}>
+            Profile data from{' '}
+            {profile?.accountEns && (
+              <>
+                <LinkExternal
+                  url={`https://app.ens.domains/name/${profile.accountEns}`}
+                  text="ENS"
+                />{' '}
+                &{' '}
+              </>
+            )}
+            <LinkExternal
+              url={`https://www.3box.io/${accountId}`}
+              text="3Box Hub"
+            />
+          </div>
+        </div>
       </div>
 
       <div>
@@ -53,22 +71,6 @@ export default function AccountHeader({
         {profile?.links?.length > 0 && (
           <PublisherLinks className={styles.publisherLinks} />
         )}
-      </div>
-      <div className={styles.meta}>
-        Profile data from{' '}
-        {profile?.accountEns && (
-          <>
-            <LinkExternal
-              url={`https://app.ens.domains/name/${profile.accountEns}`}
-              text="ENS"
-            />{' '}
-            &{' '}
-          </>
-        )}
-        <LinkExternal
-          url={`https://www.3box.io/${accountId}`}
-          text="3Box Hub"
-        />
       </div>
     </div>
   )

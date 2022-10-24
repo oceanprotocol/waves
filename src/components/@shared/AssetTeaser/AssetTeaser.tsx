@@ -34,7 +34,7 @@ export default function AssetTeaser({
               className={styles.assetimage}
               style={{
                 backgroundImage: `url(${
-                  additionalInformation.coverPicture ?? 'placeholderImage.jpg'
+                  additionalInformation.coverPicture ?? '/placeholderImage.jpg'
                 })`
               }}
             >

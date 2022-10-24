@@ -2,9 +2,10 @@ import React, { ReactElement, ReactNode } from 'react'
 import {
   // Tab,
   Tabs as ReactTabs,
-  TabList,
+  // TabList,
   TabPanel
 } from 'react-tabs'
+import cx from 'classnames'
 import styles from './index.module.css'
 // import InputRadio from '@shared/FormInput/InputRadio'
 
@@ -20,20 +21,22 @@ export interface TabsProps {
   handleTabChange?: (tabName: string) => void
   defaultIndex?: number
   showRadio?: boolean
+  noPadding?: boolean
 }
 
 export default function Tabs({
   items,
   className,
   // handleTabChange,
-  defaultIndex
+  defaultIndex,
+  noPadding
 }: // showRadio
 TabsProps): ReactElement {
   return (
     <ReactTabs className={`${className || ''}`} defaultIndex={defaultIndex}>
-      <div className={styles.tabListContainer}>
+      {/* <div className={styles.tabListContainer}>
         <TabList className={styles.tabList}>
-          {/* {items.map((item, index) => (
+          {items.map((item, index) => (
             <Tab
               className={styles.tab}
               key={index}
@@ -54,10 +57,10 @@ TabsProps): ReactElement {
                 item.title
               )}
             </Tab>
-          ))} */}
+          ))}
         </TabList>
-      </div>
-      <div className={styles.tabContent}>
+      </div> */}
+      <div className={cx(styles.tabContent, noPadding && styles.noPadding)}>
         {items.map((item, index) => (
           <TabPanel key={index}>{item.content}</TabPanel>
         ))}

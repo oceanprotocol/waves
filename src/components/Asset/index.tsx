@@ -7,6 +7,7 @@ import { useAsset } from '@context/Asset'
 import AssetContent from './AssetContent'
 import { v3MarketUri } from 'app.config'
 import Button from '@shared/atoms/Button'
+import GoBack from '@shared/GoBack/GoBack'
 
 export default function AssetDetails({ uri }: { uri: string }): ReactElement {
   const router = useRouter()
@@ -26,7 +27,8 @@ export default function AssetDetails({ uri }: { uri: string }): ReactElement {
 
   if (asset && pageTitle !== undefined && !loading) {
     return (
-      <Page title={pageTitle} uri={uri}>
+      <Page uri={uri}>
+        <GoBack />
         <AssetContent asset={asset} />
       </Page>
     )
