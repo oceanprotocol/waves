@@ -16,19 +16,19 @@ function getTabs(accountId: string, userAccountId: string): HistoryTab[] {
     {
       title: 'Published',
       content: <PublishedList accountId={accountId} />
-    },
-    {
-      title: 'Downloads',
-      content: <Downloads accountId={accountId} />
     }
+    // {
+    //   title: 'Downloads',
+    //   content: <Downloads accountId={accountId} />
+    // }
   ]
-  const computeTab: HistoryTab = {
-    title: 'Compute Jobs',
-    content: <ComputeJobs />
-  }
-  if (accountId === userAccountId) {
-    defaultTabs.push(computeTab)
-  }
+  // const computeTab: HistoryTab = {
+  //   title: 'Compute Jobs',
+  //   content: <ComputeJobs />
+  // }
+  // if (accountId === userAccountId) {
+  //   defaultTabs.push(computeTab)
+  // }
   return defaultTabs
 }
 
@@ -52,6 +52,7 @@ export default function HistoryPage({
       className={styles.tabs}
       defaultIndex={defaultTabIndex}
       noPadding
+      noTabs
     />
   )
 }

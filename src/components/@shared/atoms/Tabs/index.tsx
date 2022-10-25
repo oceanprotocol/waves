@@ -1,12 +1,8 @@
 import React, { ReactElement, ReactNode } from 'react'
-import {
-  // Tab,
-  Tabs as ReactTabs,
-  // TabList,
-  TabPanel
-} from 'react-tabs'
+import { Tab, Tabs as ReactTabs, TabList, TabPanel } from 'react-tabs'
 import cx from 'classnames'
 import styles from './index.module.css'
+import InputRadio from '@shared/FormInput/InputRadio'
 // import InputRadio from '@shared/FormInput/InputRadio'
 
 export interface TabsItem {
@@ -22,44 +18,48 @@ export interface TabsProps {
   defaultIndex?: number
   showRadio?: boolean
   noPadding?: boolean
+  noTabs?: boolean
 }
 
 export default function Tabs({
   items,
   className,
-  // handleTabChange,
+  handleTabChange,
   defaultIndex,
-  noPadding
-}: // showRadio
-TabsProps): ReactElement {
+  noPadding,
+  showRadio,
+  noTabs
+}: TabsProps): ReactElement {
   return (
     <ReactTabs className={`${className || ''}`} defaultIndex={defaultIndex}>
-      {/* <div className={styles.tabListContainer}>
-        <TabList className={styles.tabList}>
-          {items.map((item, index) => (
-            <Tab
-              className={styles.tab}
-              key={index}
-              onClick={
-                handleTabChange ? () => handleTabChange(item.title) : null
-              }
-              disabled={item.disabled}
-            >
-              {showRadio ? (
-                <InputRadio
-                  name={item.title}
-                  type="radio"
-                  checked={index === defaultIndex}
-                  options={[item.title]}
-                  readOnly
-                />
-              ) : (
-                item.title
-              )}
-            </Tab>
-          ))}
-        </TabList>
-      </div> */}
+      {!noTabs && (
+        <div className={styles.tabListContainer}>
+          <TabList className={styles.tabList}>
+            {items.map((item, index) => (
+              <Tab
+                className={styles.tab}
+                key={index}
+                onClick={
+                  handleTabChange ? () => handleTabChange(item.title) : null
+                }
+                disabled={item.disabled}
+              >
+                {showRadio ? (
+                  <InputRadio
+                    name={item.title}
+                    type="radio"
+                    checked={index === defaultIndex}
+                    options={[item.title]}
+                    readOnly
+                  />
+                ) : (
+                  item.title
+                )}
+              </Tab>
+            ))}
+          </TabList>
+        </div>
+      )}
       <div className={cx(styles.tabContent, noPadding && styles.noPadding)}>
         {items.map((item, index) => (
           <TabPanel key={index}>{item.content}</TabPanel>

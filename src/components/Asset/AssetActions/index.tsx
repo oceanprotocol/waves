@@ -153,7 +153,7 @@ export default function AssetActions({
 
   return (
     <>
-      <Tabs items={tabs} className={styles.actions} noPadding />
+      <Tabs items={tabs} className={styles.actions} noPadding noTabs />
       <Web3Feedback
         networkId={asset?.chainId}
         isAssetNetwork={isAssetNetwork}
