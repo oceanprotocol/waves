@@ -47,7 +47,7 @@
     BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-family-monospace: , monospace;
 
-  --font-size-root: 15px;
+  --font-size-root: 17px;
   --font-size-base: 1rem;
   --font-size-large: 1.2rem;
   --font-size-small: 0.85rem;
@@ -74,8 +74,8 @@
 
   --break-point--small: 640px;
   --break-point--medium: 810px;
-  --break-point--large: 810px;
-  --break-point--huge: 810px;
+  --break-point--large: 1000px;
+  --break-point--huge: 1500px;
 }
 
 .dark {

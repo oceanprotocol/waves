@@ -206,7 +206,7 @@ svg.caret {
 }
 
 .headerMenuWrapper {
-  max-width: var(--break-point--medium);
+  max-width: var(--break-point--large);
   margin: 0 auto;
 }
 
