@@ -38,9 +38,7 @@ export default function Networks(): ReactElement {
 
   const NetworkCurrencySettings: ReactElement = (
     <ul className={stylesIndex.preferencesDetails}>
-      <li>
-        <Currency />
-      </li>
+      <Currency />
       <li>
         <Label htmlFor="chains">Networks</Label>
         <FormHelp>Switch the data source for the interface.</FormHelp>
