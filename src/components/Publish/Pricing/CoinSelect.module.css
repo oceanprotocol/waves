@@ -4,7 +4,8 @@
   font-weight: var(--font-weight-base);
   border: none;
   margin-right: -0.5rem;
-  background-color: var(--background-highlight);
+  margin-left: calc(0px - var(--spacer) / 4);
+  background-color: var(--fields-background);
   width: auto;
   padding: 0 1.75rem 0 0.25rem;
   height: 41px;
