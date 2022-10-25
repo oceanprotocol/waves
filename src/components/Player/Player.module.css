@@ -1,7 +1,9 @@
 .root {
   position: sticky;
-  bottom: 0;
-  /* transform: translate(-100%); */
+  bottom: 10px;
+  width: calc(100% - var(--spacer) / 2);
+  max-width: calc(var(--break-point--medium) - (var(--spacer) / 1.2 * 2));
+  margin: 0 auto;
 }
 
 .loadingRoot {
@@ -39,11 +41,39 @@
   font-size: 1.5rem;
 }
 
-.songDetails {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding-top: 10px;
+@media (min-width: 600px) {
+  .songDetails {
+    margin-bottom: -10px;
+  }
+}
+
+.audioPlayer {
+  background-color: none;
+  background: none !important;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  display: inline-block;
+  vertical-align: middle;
+  width: calc(100% - 70px);
+  padding-left: 20px;
+  margin-bottom: -10px;
+}
+
+.playerCover {
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 15px;
+}
+
+.playerWrapper {
+  background: rgba(88, 88, 88, 0.6);
+  backdrop-filter: blur(3.5px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.songTitle {
+  margin: 0 0 5px;
 }

@@ -31,15 +31,6 @@
   }
 }
 
-.ownerActions {
-  text-align: center;
-  margin-top: var(--spacer);
-  margin-bottom: calc(var(--spacer) * 1.5);
-  padding: calc(var(--spacer) / 3) var(--spacer);
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
 .datasetSection {
   width: 100%;
   margin-bottom: 30px;
@@ -94,6 +85,12 @@
   width: calc(100% - 300px);
   display: inline-block;
   vertical-align: top;
+}
+
+@media (min-width: 700px) {
+  .songDescription {
+    padding-right: 20px;
+  }
 }
 
 .metaDataList {

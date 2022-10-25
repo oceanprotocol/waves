@@ -43,9 +43,7 @@
 }
 
 .tab[aria-selected='true'] {
-  background-color: var(--font-color-heading);
-  color: var(--background-body);
-  border-color: var(--font-color-heading);
+  background-color: var(--background-content);
 }
 
 .tab[aria-disabled='true'] {
