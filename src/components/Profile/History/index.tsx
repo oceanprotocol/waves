@@ -1,17 +1,20 @@
 import React, { ReactElement } from 'react'
 import Tabs from '@shared/atoms/Tabs'
 import PublishedList from './PublishedList'
-import Downloads from './Downloads'
-import ComputeJobs from './ComputeJobs'
+// import Downloads from './Downloads'
+// import ComputeJobs from './ComputeJobs'
 import styles from './index.module.css'
-import { useWeb3 } from '@context/Web3'
+// import { useWeb3 } from '@context/Web3'
 
 interface HistoryTab {
   title: string
   content: JSX.Element
 }
 
-function getTabs(accountId: string, userAccountId: string): HistoryTab[] {
+function getTabs(
+  accountId: string
+  // userAccountId: string
+): HistoryTab[] {
   const defaultTabs: HistoryTab[] = [
     {
       title: 'Published',
@@ -37,11 +40,14 @@ export default function HistoryPage({
 }: {
   accountIdentifier: string
 }): ReactElement {
-  const { accountId } = useWeb3()
+  // const { accountId } = useWeb3()
 
   const url = new URL(location.href)
   const defaultTab = url.searchParams.get('defaultTab')
-  const tabs = getTabs(accountIdentifier, accountId)
+  const tabs = getTabs(
+    accountIdentifier
+    // accountId
+  )
 
   let defaultTabIndex = 0
   defaultTab === 'ComputeJobs' ? (defaultTabIndex = 4) : (defaultTabIndex = 0)

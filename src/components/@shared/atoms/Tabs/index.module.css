@@ -42,6 +42,10 @@
   margin-right: auto;
 }
 
+.tab[aria-selected='true'] {
+  background-color: var(--background-content);
+}
+
 .tab[aria-disabled='true'] {
   cursor: not-allowed;
 }
