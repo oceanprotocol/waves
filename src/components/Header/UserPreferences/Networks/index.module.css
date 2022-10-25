@@ -11,6 +11,16 @@
   display: none;
 }
 
+.openCurrencyNetwork {
+  background: #252425;
+  border-radius: 5px;
+  width: 100%;
+  text-align: left;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  margin: 0 0 10px;
+}
+
 @media (max-width: 600px) {
   .networks {
     background: #252425;
@@ -22,16 +32,28 @@
     margin: 0 0 10px;
   }
 
-  .networks svg {
+  .openCurrencyNetwork svg {
     display: inline-block;
     vertical-align: middle;
     width: 30px;
-    margin-left: -2.5px;
+    margin-left: -5px;
   }
 
-  .networks span {
+  .openCurrencyNetwork span {
     display: inline-block;
     vertical-align: middle;
     margin-left: 5px;
+  }
+
+  .openCurrencyNetwork .caret {
+    float: right;
+    width: 1em;
+    height: auto;
+    margin-top: 5px;
+    transition: 0.2s all ease-in-out;
+  }
+
+  .openCaret {
+    transform: rotate(180deg);
   }
 }

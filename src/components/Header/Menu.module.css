@@ -266,6 +266,7 @@ svg.caret {
   margin-top: 10px;
   max-height: 100%;
   padding: 0 10px;
+  overflow-y: auto;
 }
 
 .logo {
@@ -313,5 +314,8 @@ svg.caret {
     padding: 10px 20px;
     box-sizing: border-box;
     margin: 0 0 10px;
+  }
+  .headerMenuWrapper {
+    overflow-y: auto;
   }
 }

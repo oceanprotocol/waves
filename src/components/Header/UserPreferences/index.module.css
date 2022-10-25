@@ -53,3 +53,11 @@
   border-bottom: none;
   margin-bottom: 0;
 }
+
+@media (max-width: 600px) {
+  .preferencesDetails {
+    padding: 0;
+    width: 100%;
+    max-width: inherit;
+  }
+}
