@@ -2,7 +2,7 @@
   position: sticky;
   bottom: 10px;
   width: calc(100% - var(--spacer) / 2);
-  max-width: var(--break-point--medium);
+  max-width: calc(var(--break-point--medium) - (var(--spacer) / 1.2 * 2));
   margin: 0 auto;
 }
 
@@ -49,7 +49,7 @@
 
 .audioPlayer {
   background-color: none;
-  background: none;
+  background: none !important;
   padding: 0;
   border: none;
   box-shadow: none;

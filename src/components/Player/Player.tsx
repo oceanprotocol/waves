@@ -15,7 +15,7 @@ export default function Player(): ReactElement {
         style={{ margin: 0 }}
         width={70}
         height={70}
-        src={songData.coverPicture ?? '/placeholderImage.jpg'}
+        src={songData?.coverPicture ?? '/placeholderImage.jpg'}
         alt="cover"
         className={styles.playerCover}
       />
