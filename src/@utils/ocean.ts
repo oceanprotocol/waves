@@ -14,6 +14,11 @@ export function getOceanConfig(network: string | number): Config {
       ? undefined
       : process.env.NEXT_PUBLIC_INFURA_PROJECT_ID
   ) as Config
+
+  if (network === 5)
+    config.providerUri = 'https://goerli.provider.waves.oceanprotocol.com'
+  if (network === 80001)
+    config.providerUri = `https://mumbai.provider.waves.oceanprotocol.com`
   return config as Config
 }
 

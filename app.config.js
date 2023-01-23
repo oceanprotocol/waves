@@ -19,10 +19,10 @@ module.exports = {
 
   // List of chainIds which metadata cache queries will return by default.
   // This preselects the Chains user preferences.
-  chainIds: [80001, 1287],
+  chainIds: [80001, 5],
 
   // List of all supported chainIds. Used to populate the Chains user preferences list.
-  chainIdsSupported: [ 80001, 1287],
+  chainIdsSupported: [80001, 5],
 
   infuraProjectId: process.env.NEXT_PUBLIC_INFURA_PROJECT_ID || 'xxx',
 
