@@ -1,6 +1,6 @@
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
-<h1 align="center">Ocean Waves</h1>
+<h1 align="center">Ocean Marketplace</h1>
 
 [![Build Status](https://github.com/oceanprotocol/market/workflows/CI/badge.svg)](https://github.com/oceanprotocol/market/actions)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c85f4d8b-95e1-4010-95a4-2bacd8b90981/deploy-status)](https://app.netlify.com/sites/market-oceanprotocol/deploys)
@@ -19,6 +19,13 @@
   - [3Box](#3box)
   - [Purgatory](#purgatory)
   - [Network Metadata](#network-metadata)
+- [🚀 Web3 Integration](#-web3-integration)
+  - [Create Album](#createalbum)
+  - [Encrypt](#encrypt)
+  - [Publish](#publish)
+  - [Set New Metadata](#setnewmetadata)
+  - [Handle Submit](#handlesubmit)
+  - [Buy Album](#buyalbum)
 - [👩‍🎤 Storybook](#-storybook)
 - [🤖 Testing](#-testing)
 - [✨ Code Style](#-code-style)
@@ -278,6 +285,424 @@ export default function NetworkName(): ReactElement {
   )
 }
 ```
+
+## 🌐 Web3 Integration
+Web3 Integration is a critical component of Ocean Marketplace, enabling seamless interaction with blockchain technology and smart contracts. It facilitates functions like asset creation, encryption, publishing, and metadata management while ensuring secure and transparent data transactions on the Ocean Protocol network.
+
+The `PublishPage` component in this project is a key part of the data publishing workflow, and it heavily relies on the integration with the Web3 ecosystem. Below, we'll explore the functions and processes involved in this component:
+
+### `createAlbum()`
+
+The `createAlbum` function is responsible for creating NFTs (Non-Fungible Tokens) and datatokens, as well as defining the pricing schema for the published data. 
+
+```tsx
+  async function createAlbum(values: FormPublishData): Promise<{
+    erc721Address: string
+    datatokenAddress: string
+  }> {
+    setFeedback((prevState) => ({
+      ...prevState,
+      '1': {
+        ...prevState['1'],
+        status: 'active',
+        errorMessage: null
+      }
+    }))
+    try {
+      const config = getOceanConfig(chainId)
+      LoggerInstance.log('[publish] using config: ', config)
+      const { erc721Address, datatokenAddress, txHash } =
+        await createTokensAndPricing(
+          values,
+          accountId,
+          config,
+          nftFactory,
+          web3
+        )
+      const isSuccess = Boolean(erc721Address && txHash && datatokenAddress)
+      if (!isSuccess) throw new Error('No Token created. Please try again.')
+
+      LoggerInstance.log('[publish] createTokensAndPricing tx', txHash)
+      LoggerInstance.log('[publish] erc721Address', erc721Address)
+      LoggerInstance.log('[publish] datatokenAddress', datatokenAddress)
+
+      setFeedback((prevState) => ({
+        ...prevState,
+        '1': {
+          ...prevState['1'],
+          status: 'success',
+          txHash
+        }
+      }))
+
+      return { erc721Address, datatokenAddress }
+    } catch (error) {
+      LoggerInstance.error('[publish] error', error.message)
+      if (error.message.length > 65) {
+        error.message = 'No Token created. Please try again.'
+      }
+
+      setFeedback((prevState) => ({
+        ...prevState,
+        '1': {
+          ...prevState['1'],
+          status: 'error',
+          errorMessage: error.message
+        }
+      }))
+    }
+  }
+```
+
+Here's what it does:
+
+- It uses the provided form data (`values`) to create NFTs and datatokens.
+- This function communicates with the Ocean Protocol contracts to create these tokens.
+- If successful, it updates the state with the created ERC721 (NFT) and datatoken addresses.
+
+### `encrypt()`
+
+The `encrypt` function takes the form data, along with the ERC721 (NFT) and datatoken addresses, and encrypts the DDO (Decentralized Data Object). 
+
+```tsx
+  async function encrypt(
+    values: FormPublishData,
+    erc721Address: string,
+    datatokenAddress: string
+  ): Promise<{ ddo: DDO; ddoEncrypted: string }> {
+    setFeedback((prevState) => ({
+      ...prevState,
+      '2': {
+        ...prevState['2'],
+        status: 'active',
+        errorMessage: null
+      }
+    }))
+
+    try {
+      if (!datatokenAddress || !erc721Address)
+        throw new Error('No NFT or Datatoken received. Please try again.')
+      const ddo = await transformPublishFormToDdo(
+        values,
+        newCancelToken(),
+        datatokenAddress,
+        erc721Address,
+        albumPrice
+      )
+
+      if (!ddo) throw new Error('No DDO received. Please try again.')
+      setDdo(ddo)
+      LoggerInstance.log('[publish] Got new DDO', ddo)
+
+      const ddoEncrypted = await ProviderInstance.encrypt(
+        ddo,
+        values.services[0].providerUrl.url,
+        newAbortController()
+      )
+
+      if (!ddoEncrypted)
+        throw new Error('No encrypted DDO received. Please try again.')
+
+      setDdoEncrypted(ddoEncrypted)
+      LoggerInstance.log('[publish] Got encrypted DDO', ddoEncrypted)
+
+      setFeedback((prevState) => ({
+        ...prevState,
+        '2': {
+          ...prevState['2'],
+          status: 'success'
+        }
+      }))
+
+      return { ddo, ddoEncrypted }
+    } catch (error) {
+      LoggerInstance.error('[publish] error', error.message)
+      setFeedback((prevState) => ({
+        ...prevState,
+        '2': {
+          ...prevState['2'],
+          status: 'error',
+          errorMessage: error.message
+        }
+      }))
+    }
+  }
+```
+
+Here's what it does:
+
+- It transforms the form data into a DDO using the provided addresses.
+- The DDO is then encrypted using the Ocean Protocol's `ProviderInstance`.
+- The encrypted DDO is updated in the component's state.
+
+### `publish()`
+
+The `publish` function is responsible for writing the DDO and associated metadata into the NFT metadata. 
+
+```tsx
+  async function publish(
+    values: FormPublishData,
+    ddo: DDO,
+    ddoEncrypted: string
+  ): Promise<{ did: string }> {
+    setFeedback((prevState) => ({
+      ...prevState,
+      '3': {
+        ...prevState['3'],
+        status: 'active',
+        errorMessage: null
+      }
+    }))
+
+    try {
+      if (!ddo || !ddoEncrypted)
+        throw new Error('No DDO received. Please try again.')
+
+      const res = await setNFTMetadataAndTokenURI(
+        ddo,
+        accountId,
+        web3,
+        values.metadata.nft,
+        newAbortController()
+      )
+      if (!res?.transactionHash)
+        throw new Error(
+          'Metadata could not be written into the NFT. Please try again.'
+        )
+
+      LoggerInstance.log('[publish] setMetadata result', res)
+
+      setFeedback((prevState) => ({
+        ...prevState,
+        '3': {
+          ...prevState['3'],
+          status: res ? 'success' : 'error',
+          txHash: res?.transactionHash
+        }
+      }))
+
+      return { did: ddo.id }
+    } catch (error) {
+      LoggerInstance.error('[publish] error', error.message)
+      setFeedback((prevState) => ({
+        ...prevState,
+        '3': {
+          ...prevState['3'],
+          status: 'error',
+          errorMessage: error.message
+        }
+      }))
+    }
+  }
+```
+
+Here's what it does:
+
+- It takes the form data, the DDO, and the encrypted DDO as input.
+- The function writes the metadata into the NFT, ensuring that it is associated with the published data.
+- If successful, it returns the DID (Decentralized Identifier) of the published data.
+
+### `setNewMetadata()`
+
+The `setNewMetadata` function is responsible for updating the metadata of songNFTs that are part of the album. 
+
+```tsx
+  async function setNewMetadata(
+    values: FormPublishData,
+    albumDid: string,
+    albumName: string
+  ) {
+    setFeedback((prevState) => ({
+      ...prevState,
+      '4': {
+        ...prevState['4'],
+        status: 'active',
+        errorMessage: null
+      }
+    }))
+
+    const txs: Promise<TransactionReceipt>[] = []
+    for (let i = 0; i < values.metadata.songs.length; i++) {
+      const { did } = values.metadata.songs[i]
+      const tx = updateMetadata(did, albumDid, albumName)
+      txs.push(tx)
+    }
+    await Promise.all(txs)
+      .then((txs) => {
+        console.log('txs', txs)
+      })
+      .then((txs) => {
+        setFeedback((prevState) => ({
+          ...prevState,
+          '4': {
+            ...prevState['4'],
+            status: 'success',
+            txs
+          }
+        }))
+      })
+      .catch((error) => {
+        LoggerInstance.error('[publish] error', error.message)
+        setFeedback((prevState) => ({
+          ...prevState,
+          '4': {
+            ...prevState['4'],
+            status: 'error',
+            errorMessage: error.message
+          }
+        }))
+      })
+  }
+```
+
+Here's what it does:
+
+- It iterates through the list of songs in the form data and updates their metadata.
+- The function returns a list of transaction receipts for the updates.
+
+### `handleSubmit()`
+
+The `handleSubmit` function orchestrates the entire publishing process. It ensures that each step (createAlbum, encrypt, publish, setNewMetadata) is executed in sequence. 
+
+```tsx
+  async function handleSubmit(values: FormPublishData) {
+    try {
+      const [isOwned, song] = await hasSongsPermission(selectedSongs)
+      if (!isOwned) {
+        throw new Error(`You don't own the song ${song}`)
+      }
+      let _erc721Address = erc721Address
+      let _datatokenAddress = datatokenAddress
+      let _ddo = ddo
+      let _ddoEncrypted = ddoEncrypted
+      let _did = did
+      if (!_erc721Address || !_datatokenAddress) {
+        const { erc721Address, datatokenAddress } = await createAlbum(values)
+        _erc721Address = erc721Address
+        _datatokenAddress = datatokenAddress
+        setErc721Address(erc721Address)
+        setDatatokenAddress(datatokenAddress)
+      }
+
+      if (!_ddo || !_ddoEncrypted) {
+        const { ddo, ddoEncrypted } = await encrypt(
+          values,
+          _erc721Address,
+          _datatokenAddress
+        )
+        _ddo = ddo
+        _ddoEncrypted = ddoEncrypted
+        setDdo(ddo)
+        setDdoEncrypted(ddoEncrypted)
+      }
+
+      if (!_did) {
+        const { did } = await publish(values, _ddo, _ddoEncrypted)
+        _did = did
+      }
+
+      await setNewMetadata(values, _did, _ddo.metadata.name)
+
+      setDid(_did)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+```
+
+Here's what it does:
+
+- If the ERC721 (NFT) and datatoken addresses are not available, it calls the `createAlbum` function to create these tokens.
+- If the DDO or encrypted DDO is missing, it calls the `encrypt` function to generate and encrypt the DDO.
+- Then, it calls the `publish` function to write the DDO into the NFT metadata.
+- Finally, it calls the `setNewMetadata` function to update the metadata of songNFTs.
+
+These functions collectively enable the seamless publishing of data assets on the Ocean Protocol network, integrating with Web3 technologies.
+
+**Note:** This explanation provides a high-level overview of the functions. Detailed implementation and code can be found in the `PublishPage` component in this repository.
+
+### `BuyAlbum()`
+
+The `BuyAlbum` function represents a React component responsible for handling the purchase of an album containing multiple data assets on the Ocean Protocol network. This component integrates with the Web3 ecosystem and utilizes various utility functions to facilitate the purchase process. 
+
+```tsx
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+    console.log('clicked buy album')
+    try {
+      const orders = []
+      for (let i = 0; i < dids.length; i++) {
+        const asset = await retrieveAsset(dids[i], newCancelToken())
+
+        const accessDetails = await getAccessDetails(
+          asset.chainId,
+          asset.services[0].datatokenAddress,
+          asset.services[0].timeout,
+          accountId
+        )
+        const fullAsset = { ...asset, accessDetails }
+        const orderPriceAndFees = await getOrderPriceAndFees(
+          fullAsset,
+          ZERO_ADDRESS
+        )
+
+        orders.push({
+          asset: fullAsset,
+          orderPriceAndFees,
+          hasDatatoken: true
+        })
+      }
+
+      const res = await startMultipleOrders(
+        web3,
+        nftFactory,
+        chainId,
+        accountId,
+        orders
+      )
+      if (!res?.transactionHash)
+        throw new Error('MultiOrders failed. Please try again.')
+
+      console.log('Succesfull purchase!', res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+```
+
+Here's what it does:
+
+- It accesses essential Web3-related context variables such as `accountId`, `web3`, and `chainId` using the `useWeb3` hook.
+
+- The function defines an array of `dids` (Decentralized Identifiers) representing the data assets to be purchased. These DIDs are essential for identifying the assets.
+
+- Within the `handleSubmit` function, which is invoked when a form is submitted, the following steps are performed:
+
+  - It prevents the default form submission behavior and logs a message to indicate that the "Buy Album" button has been clicked.
+
+  - It initializes an empty `orders` array, which will be used to store order details for each data asset in the album.
+
+  - It iterates through the array of `dids` and performs the following actions for each data asset:
+
+     - Retrieves the asset information by calling the `retrieveAsset` function, providing the DID and a cancel token to potentially abort the request.
+
+     - Obtains access details for the asset, including the datatoken address and access timeout, by invoking the `getAccessDetails` function, passing the asset's information and the user's `accountId`.
+
+     - Combines the retrieved asset information and access details into a `fullAsset` object.
+
+     - Calculates the order price and fees for the asset using the `getOrderPriceAndFees` function, with the `ZERO_ADDRESS` as the recipient address.
+
+     - Pushes an object representing the order, including the `fullAsset`, order price and fees, and a flag indicating that the asset has a datatoken, into the `orders` array.
+
+  - After processing all data assets, it invokes the `startMultipleOrders` function, passing the `web3`, `nftFactory`, `chainId`, `accountId`, and the `orders` array.
+
+  - If the `startMultipleOrders` function is successful and returns a transaction hash (`res?.transactionHash`), it logs a success message indicating that the purchase was successful.
+
+  - In case of any errors during the purchase process, it logs an error message to help identify and troubleshoot any issues.
+
+The `BuyAlbum` component serves as a crucial part of the application's user interface, allowing users to initiate the purchase of an album containing multiple data assets, all while seamlessly interacting with Web3 technologies.
+
+
 
 ## 👩‍🎤 Storybook
 
