@@ -7,7 +7,7 @@ module.exports = {
   // return appConfig.metadataCacheUri
   metadataCacheUri:
     process.env.NEXT_PUBLIC_METADATACACHE_URI ||
-    'https://aquarius.waves.oceanprotocol.com',
+    'https://v4.aquarius.oceanprotocol.com',
 
   v3MetadataCacheUri:
     process.env.NEXT_PUBLIC_V3_METADATACACHE_URI ||
