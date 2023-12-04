@@ -20,7 +20,7 @@
   - [Purgatory](#purgatory)
   - [Network Metadata](#network-metadata)
 - [🚀 Web3 Integration](#-web3-integration)
-  - [Create Album](#createalbum)
+  - [Create](#create)
   - [Encrypt](#encrypt)
   - [Publish](#publish)
   - [Set New Metadata](#setnewmetadata)
@@ -291,12 +291,12 @@ Web3 Integration is a critical component of Ocean Marketplace, enabling seamless
 
 The `PublishPage` component in this project is a key part of the data publishing workflow, and it heavily relies on the integration with the Web3 ecosystem. Below, we'll explore the functions and processes involved in this component:
 
-### `createAlbum()`
+### `create()`
 
-The `createAlbum` function is responsible for creating NFTs (Non-Fungible Tokens) and datatokens, as well as defining the pricing schema for the published data. 
+The `create` function is responsible for creating NFTs (Non-Fungible Tokens) and datatokens, as well as defining the pricing schema for the published data. 
 
 ```tsx
-  async function createAlbum(values: FormPublishData): Promise<{
+  async function create(values: FormPublishData): Promise<{
     erc721Address: string
     datatokenAddress: string
   }> {
