@@ -33,6 +33,7 @@
 - [⬆️ Deployment](#️-deployment)
 - [💖 Contributing](#-contributing)
 - [🍴 Forking](#-forking)
+- [🎬 Changing the Asset Type](#-changing-the-asset-type)
 - [💰 Pricing Options](#-pricing-options)
   - [Fixed Pricing](#fixed-pricing)
   - [Free Pricing](#free-pricing)
@@ -829,6 +830,29 @@ If you are looking to fork Ocean Market and create your own marketplace, you wil
 - [Forking Ocean Market](https://docs.oceanprotocol.com/building-with-ocean/build-a-marketplace/forking-ocean-market)
 - [Customising your Market](https://docs.oceanprotocol.com/building-with-ocean/build-a-marketplace/customising-your-market)
 - [Deploying your Market](https://docs.oceanprotocol.com/building-with-ocean/build-a-marketplace/deploying-market)
+
+
+## 🎬 Changing the Asset Type
+
+The marketplace currently lists audio files. That is specified by a variable `category`, in the `additionalInformation` field of the NFT metadata. If you would like to change the type of assets submitted and listed in your fork (say, to mp4 videos), instances of the term `audio` need to be changed to your own type of asset in three locations:
+
+- In the file `aquarius.ts` line 53:
+
+```tsx
+  getFilterTerm('metadata.additionalInformation.category', 'audio')
+```
+This specifies which type of asset Aquarius will list in your fork.
+- In the files `_constants.tsx` line 71, and `_types.ts` line 37:
+
+```tsx
+  category:  'audio',
+```
+These specify that new submissions have the `audio` type.
+
+Moreover, you should update the `ACCEPTED_FILE_TYPES` array, in line 11 of `index.tsx`, to include the new type of asset you want to list (e.g. `'video/mp4'`), and the `options` array, in line 68 of `form.json` and line 14 of `index.tsx` to genres that correspond to your type of asset. 
+
+Finally, the consumption of assets is currently handled by the `react-h5-audio-player`
+library. You should change this to an appropriate consumption method for your type of asset (e.g. a video player or video download).
 
 ## 💰 Pricing Options
 
